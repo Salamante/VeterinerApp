@@ -1,7 +1,7 @@
 <template>
-  <div class="body">
+  <div class="form-container mx-auto">
     <v-form>
-        <div class="form-container">
+        <div>
             <h1>Login</h1>
             <v-col>
                 <v-text-field
@@ -146,7 +146,6 @@ export default {
 }
 .form-container {
     width: 30%;
-    margin: auto;
 }
 .custom-loader {
     animation: loader 1s infinite;
