@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
-import Customers from '@/components/Customers'
 import calendar from '@/components/calendar'
 
 Vue.use(Router)
@@ -12,11 +11,6 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/customers',
-      name: 'Customers',
-      component: Customers
     },
     {
       path: '/appointment',
@@ -37,6 +31,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: () => import('../views/Profile')
+    },
+    {
+      path: '/customers',
+      name: 'Customers',
+      component: () => import('../views/Customers')
     }
   ]
 })

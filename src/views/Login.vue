@@ -48,7 +48,7 @@
         <br />
         <h3>test için:</h3>
         <h3>email: coskuntest@gmail.com</h3>
-        <h3>password: test12345</h3>
+        <h3>password: test123456</h3>
         <br />
       </div>
       <v-snackbar
@@ -87,6 +87,8 @@ export default {
       }
     }
   },
+  mounted () {
+  },
   methods: {
     async login () {
       try {
@@ -94,21 +96,25 @@ export default {
         this.response = await AuthenticationService.login(
           this.user
         )
-
         // Burada login olduktan sonra serverdan gelen payload u Vuex store(./store/store.js) icinde saklıyoruz.
         const token = this.response.data.access
         this.$store.dispatch('setToken', token)
+        localStorage.setItem('accessToken', token)
+        localStorage.setItem('refreshToken', this.response.data.refresh)
 
         // Burada profile ait datayı serverdan cekip yine store icinde saklıyoruz.
-        const payload = (await AuthenticationService.getUserProfile(this.response.data.access)).data
+        const payload = (await AuthenticationService.getUserProfile()).data
         this.$store.dispatch('setUser', payload)
+        localStorage.setItem('profile', JSON.stringify(payload))
 
         // Login olduktan sonra /profile e yonlendiriyor.
+
         this.snackbar = true
         setTimeout(() => { this.snackbar = false }, 2000)
         setTimeout(() => this.$router.push({
           name: 'Profile'
         }), 1500)
+        setTimeout(() => window.location.reload(), 1700)
       } catch (err) {
         console.log(err)
         setTimeout(() => { this.error = null }, 2000)
@@ -116,9 +122,6 @@ export default {
     },
     alertPopUp () {
       alert('Login başarılı!')
-    },
-    test () {
-
     }
   },
   watch: {

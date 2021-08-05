@@ -1,4 +1,5 @@
 <template>
+<v-container>
   <v-data-table
     :headers="headers"
     :items="customers"
@@ -134,7 +135,7 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ item }">
+    <template v-slot:[`item.actions`]="{ item }">
       <v-icon
         small
         class="mr-2"
@@ -158,6 +159,7 @@
       </v-btn>
     </template>
   </v-data-table>
+</v-container>
 </template>
 
 <script>

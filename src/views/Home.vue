@@ -1,7 +1,7 @@
 <template>
-  <div id="main-container">
-    <main-bar />
-    <div :class="{ 'left-margin': !this.$vuetify.breakpoint.mobile }">
+  <div id="main-container" class="d-flex flex-row">
+      <!-- <main-bar @menuClicked="MenuSwitch" /> -->
+    <div class="flex-grow-1">
       <customer-table />
     </div>
   </div>
@@ -18,6 +18,13 @@ export default {
   },
   data () {
     return {
+      isMini: false
+    }
+  },
+  methods: {
+    MenuSwitch () {
+      this.isMini = !this.isMini
+      console.log(this.isMini)
     }
   }
 }
@@ -26,5 +33,8 @@ export default {
 <style scoped>
 .left-margin {
   margin-left: 256px;
+}
+.menu-small {
+  margin-left:50px;
 }
 </style>

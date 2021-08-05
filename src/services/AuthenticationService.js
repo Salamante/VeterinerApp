@@ -8,11 +8,39 @@ export default {
   login (credentials) {
     return Api().post('api/jwt/create/', credentials)
   },
-  getUserProfile (credentials) {
-    return Api().get('api/profile', {
+  getUserProfile () {
+    const token = localStorage.getItem('accessToken')
+    return Api().get('api/profile/', {
       headers: {
-        'Authorization': `Bearer ${credentials}`
+        'Authorization': `Bearer ${token}`
       }
     })
+  },
+  patchUserProfile (nameToChange) {
+    const token = localStorage.getItem('accessToken')
+    return Api().patch('api/profile/',
+      {
+        name: nameToChange
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+    )
+  },
+  changePassword (oldPass, newPass) {
+    const token = localStorage.getItem('accessToken')
+    return Api().post('api/users/set_password/',
+      {
+        current_password: oldPass,
+        new_password: newPass
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+    )
   }
 }

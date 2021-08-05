@@ -1,10 +1,11 @@
 <template>
   <div class="body">
     <v-form>
-        <div class="form-container">
+        <div class="form-container mx-auto">
             <h1>REGISTER</h1>
-            <v-col
+            <v-col class="pr-4 pl-4"
               v-if="!isRegistered">
+                <h4 class="text-start mb-2">Email</h4>
                 <v-text-field
                   v-model="email"
                   label="Email"
@@ -14,6 +15,7 @@
                   hint="ex: vuejs@gmail.com"
                 ></v-text-field>
 
+                <h4 class="text-start mb-2">Password</h4>
                 <v-text-field
                   v-model="password"
                   type="password"
@@ -23,21 +25,25 @@
                   :rules="rules"
                   hint="Required to be 8 character long minimum"
                 ></v-text-field>
+
+                <h4 class="text-start mb-2">Name</h4>
                 <v-text-field
                   v-model="name"
                   label="İsim"
                   outlined
                   clearable
                   :rules="rules"
-                  hint="Required to be 8 character long minimum"
+                  hint="ör: Emre Altın"
                 ></v-text-field>
+
+                <h4 class="text-start mb-2">Phone</h4>
                 <v-text-field
                   v-model="phone"
                   label="Telefon"
                   outlined
                   clearable
                   :rules="rules"
-                  hint="Required to be 8 character long minimum"
+                  hint="En az 8 karakter uzunlugunda olmalı"
                 ></v-text-field>
             </v-col>
             <div id="error">
@@ -52,7 +58,7 @@
           <v-btn
             :loading="loading4"
             :disabled="loading4"
-            @click="register(); loader = 'loading4'">
+            @click="register(); loader = 'loading4'" class="mb-6">
               Üye Ol
           <template v-slot:loader>
             <span class="custom-loader">
@@ -60,6 +66,13 @@
             </span>
           </template>
         </v-btn>
+        <v-chip
+          link
+          outlined
+          class="chip"
+          :to="{name: 'Home'}"
+          color="green"
+        ><v-icon class="mr-1">mdi-home</v-icon>Anasayfa</v-chip>
       </div>
       <v-snackbar
         v-if="snackbar"
@@ -148,10 +161,19 @@ export default {
   top: 0;
   margin: 0;
   padding: 0;
+  min-height: 1080px;
+  background: -webkit-linear-gradient(to right, #E4E5E6, #00416A);
+  background: linear-gradient(to right, #E4E5E6, #00416A);
 }
 .form-container {
     width: 30%;
-    margin: auto;
+    margin-top: 50px;
+    background: white;
+    border-radius: 15px;
+}
+.chip {
+  margin-left: 130px;
+  position: absolute;
 }
 .custom-loader {
     animation: loader 1s infinite;

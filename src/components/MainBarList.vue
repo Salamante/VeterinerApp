@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-list
             dense
             nav
@@ -44,6 +45,7 @@
             </v-list-item>
 
             <v-list-item
+            v-if="!this.$store.state.isUserLoggedIn"
             link
             :to="{name: 'Login'}"
             >
@@ -55,11 +57,44 @@
                 <v-list-item-title>Giriş Yap</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
+
+            <v-list-item
+            v-if="isLogged"
+            link
+            @click="logout"
+            >
+            <v-list-item-icon>
+                <v-icon>mdi-login</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+                <v-list-item-title>Çıkış Yap</v-list-item-title>
+            </v-list-item-content>
+            </v-list-item>
         </v-list>
+        </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      isLogged: this.$store.state.isUserLoggedIn
+    }
+  },
+  methods: {
+    logout () {
+      window.location.reload()
+      this.$emit('loggedOut')
+      this.$router.push({name: 'Login'})
+    }
+  }
 
 }
 </script>
+
+<style scoped>
+.font {
+  font-family: Arial, Helvetica, sans-serif ;
+}
+</style>
