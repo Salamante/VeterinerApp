@@ -16,7 +16,7 @@ export default {
       }
     })
   },
-  patchUserProfile (nameToChange) {
+  changeUserName (nameToChange) {
     const token = localStorage.getItem('accessToken')
     return Api().patch('api/profile/',
       {
