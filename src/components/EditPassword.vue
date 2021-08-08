@@ -8,11 +8,13 @@
     <v-form>
       <v-container>
         <password-text-field
+            ref="PasswordTextField"
           :placeholder="placeholder"
           :title="title.old"
           @input="updateOldPass"
         />
         <password-text-field
+            ref="PasswordTextField2"
           :placeholder="placeholder"
           :title="title.new"
           @input="updateNewPass"
@@ -54,8 +56,8 @@ export default {
   }),
   methods: {
     clearForm () {
-      this.oldPassword = ''
-      this.newPassword = ''
+      this.$refs.PasswordTextField.clearField()
+      this.$refs.PasswordTextField2.clearField()
     },
     submit () {
       this.form.emitedOldPassword = this.oldPassword

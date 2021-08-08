@@ -4,10 +4,37 @@ import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
+const moduleMainBar = {
+  state: () => ({
+    isMini: false
+  })
+}
+
+const moduleUser = {
+  state: () => ({
+    user: null,
+    isUserloggedIn: false
+  }),
+  mutations: {
+    setUser (state, payload) {
+      state.user = payload
+    }
+  },
+  actions: {
+    setUser ({commit}, payload) {
+      commit('setUser', payload)
+    }
+  }
+}
+
 export default new Vuex.Store({
   plugins: [createPersistedState({
     storage: window.sessionStorage
   })],
+  modules: {
+    MainBar: moduleMainBar,
+    User: moduleUser
+  },
   state: {
     token: null,
     user: null,

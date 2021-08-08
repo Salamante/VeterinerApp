@@ -30,10 +30,13 @@ export default {
       }
     }
   },
-  computed: {
-    test () {
-      return this.$emit('update:email', this.email)
+  methods: {
+    clearField () {
+      this.email = ''
     }
+  },
+  created: function () {
+    this.$on('clearField', this.clearField)
   }
 }
 </script>

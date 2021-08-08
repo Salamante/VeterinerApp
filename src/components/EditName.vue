@@ -14,12 +14,13 @@
           <v-form>
             <v-container>
               <h4 class="text-start ml-3">Eski İsim</h4>
-              <name-text-field :label="newLabel" @input="updateNewName"/>
+              <name-text-field ref="NameTextField" :label="newLabel" @input="updateNewName"/>
+              <h4></h4>
             </v-container>
             <v-divider class="mb-4 mt-2"></v-divider>
             <div id="button-container" class="d-flex ml-6">
                 <v-btn type="submit" dark class="mt-2" color="light-blue accent-4" @click="submit">Güncelle</v-btn>
-                <v-btn dark class="mt-2 ml-4" @click="clearForm">Formu Resetle</v-btn>
+                <v-btn dark class="mt-2 ml-4" @click="clearForm">Temizle</v-btn>
             </div>
           </v-form>
         </v-card>
@@ -40,7 +41,7 @@ export default {
   }),
   methods: {
     clearForm () {
-      this.newName = ''
+      this.$refs.NameTextField.clearField()
     },
     async submit () {
       const response = await AuthenticationService.changeUserName(this.newName)
@@ -48,6 +49,7 @@ export default {
     },
     updateNewName (payload) {
       this.newName = payload
+      console.log(this.newName)
     }
   }
 }

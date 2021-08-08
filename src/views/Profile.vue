@@ -2,7 +2,7 @@
     <div id="main-container d-flex flex-row">
       <v-container>
         <not-logged-in-profile v-if="!this.$store.state.isUserLoggedIn"/>
-        <profile-card :name="this.user.name" v-if="this.$store.state.isUserLoggedIn"/>
+        <profile-card :name="this.user ? this.user.name : 'Ziyaretçi'" v-if="this.$store.state.isUserLoggedIn"/>
         <v-col class="d-flex flex-column justify-start">
           <v-row>
             <v-col>
@@ -12,9 +12,10 @@
               <edit-password v-if="this.$store.state.isUserLoggedIn" @changePass="changePass" />
             </v-col>
           </v-row>
-          <v-row class="d-flex flex-row justify-space-between">
-            <edit-name class=""/>
-            <edit-name class=""/>
+          <v-row>
+            <v-col class="v-col">
+              <edit-name v-if="this.$store.state.isUserLoggedIn" class="flex-shrink-1"/>
+            </v-col>
           </v-row>
         </v-col>
         <v-snackbar v-model="snackbar" color="red" top rounded="pill">Şifre değiştirme başarılı!</v-snackbar>
@@ -58,8 +59,7 @@ export default {
   },
   async mounted () {
     // this.user = await JSON.parse(localStorage.getItem('profile'))
-    this.user = await this.$store.state.user ? this.$store.state.user : 'null'
-    console.log(this.$store.state.user.name)
+    this.user = await this.$store.state.User.user ? this.$store.state.User.user : 'Ziyaretçi'
   },
   methods: {
     async submit (payload) {
@@ -90,4 +90,7 @@ export default {
 </script>
 
 <style scoped>
+.v-col {
+  max-width: 50%;
+}
 </style>

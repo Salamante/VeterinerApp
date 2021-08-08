@@ -1,86 +1,88 @@
 <template>
   <div class="body">
-    <v-form>
-        <div class="form-container mx-auto">
-            <h1>REGISTER</h1>
-            <v-col class="pr-4 pl-4"
-              v-if="!isRegistered">
-                <h4 class="text-start mb-2">Email</h4>
-                <v-text-field
-                  v-model="email"
-                  label="Email"
-                  outlined
-                  clearable
-                  :rules="rules"
-                  hint="ex: vuejs@gmail.com"
-                ></v-text-field>
+    <v-container>
+      <v-form>
+          <div class="form-container mx-auto">
+              <h1>REGISTER</h1>
+              <v-col class="pr-4 pl-4"
+                v-if="!isRegistered">
+                  <h4 class="text-start mb-2">Email</h4>
+                  <v-text-field
+                    v-model="email"
+                    label="Email"
+                    outlined
+                    clearable
+                    :rules="rules"
+                    hint="ex: vuejs@gmail.com"
+                  ></v-text-field>
 
-                <h4 class="text-start mb-2">Password</h4>
-                <v-text-field
-                  v-model="password"
-                  type="password"
-                  label="Şifre"
-                  outlined
-                  clearable
-                  :rules="rules"
-                  hint="Required to be 8 character long minimum"
-                ></v-text-field>
+                  <h4 class="text-start mb-2">Password</h4>
+                  <v-text-field
+                    v-model="password"
+                    type="password"
+                    label="Şifre"
+                    outlined
+                    clearable
+                    :rules="rules"
+                    hint="Required to be 8 character long minimum"
+                  ></v-text-field>
 
-                <h4 class="text-start mb-2">Name</h4>
-                <v-text-field
-                  v-model="name"
-                  label="İsim"
-                  outlined
-                  clearable
-                  :rules="rules"
-                  hint="ör: Emre Altın"
-                ></v-text-field>
+                  <h4 class="text-start mb-2">Name</h4>
+                  <v-text-field
+                    v-model="name"
+                    label="İsim"
+                    outlined
+                    clearable
+                    :rules="rules"
+                    hint="ör: Emre Altın"
+                  ></v-text-field>
 
-                <h4 class="text-start mb-2">Phone</h4>
-                <v-text-field
-                  v-model="phone"
-                  label="Telefon"
-                  outlined
-                  clearable
-                  :rules="rules"
-                  hint="En az 8 karakter uzunlugunda olmalı"
-                ></v-text-field>
-            </v-col>
-            <div id="error">
-              <v-alert
-                type="error"
-                v-if="error"
-                class="mr-10 mt-2"
-                color="pink">
-                {{error}}
-              </v-alert>
-            </div>
-          <v-btn
-            :loading="loading4"
-            :disabled="loading4"
-            @click="register(); loader = 'loading4'" class="mb-6">
-              Üye Ol
-          <template v-slot:loader>
-            <span class="custom-loader">
-              <v-icon light>mdi-cached</v-icon>
-            </span>
-          </template>
-        </v-btn>
-        <v-chip
-          link
-          outlined
-          class="chip"
-          :to="{name: 'Home'}"
-          color="green"
-        ><v-icon class="mr-1">mdi-home</v-icon>Anasayfa</v-chip>
-      </div>
-      <v-snackbar
-        v-if="snackbar"
-        v-model="snackbar"
-      >
-        Registeration is Successful
-      </v-snackbar>
-    </v-form>
+                  <h4 class="text-start mb-2">Phone</h4>
+                  <v-text-field
+                    v-model="phone"
+                    label="Telefon"
+                    outlined
+                    clearable
+                    :rules="rules"
+                    hint="En az 8 karakter uzunlugunda olmalı"
+                  ></v-text-field>
+              </v-col>
+              <div id="error">
+                <v-alert
+                  type="error"
+                  v-if="error"
+                  class="mr-10 mt-2"
+                  color="pink">
+                  {{error}}
+                </v-alert>
+              </div>
+            <v-btn
+              :loading="loading4"
+              :disabled="loading4"
+              @click="register(); loader = 'loading4'" class="mb-6">
+                Üye Ol
+            <template v-slot:loader>
+              <span class="custom-loader">
+                <v-icon light>mdi-cached</v-icon>
+              </span>
+            </template>
+          </v-btn>
+          <v-chip
+            link
+            outlined
+            class="chip"
+            :to="{name: 'Home'}"
+            color="green"
+          ><v-icon class="mr-1">mdi-home</v-icon>Anasayfa</v-chip>
+        </div>
+        <v-snackbar
+          v-if="snackbar"
+          v-model="snackbar"
+        >
+          Registeration is Successful
+        </v-snackbar>
+      </v-form>
+    </v-container>
   </div>
 </template>
 
@@ -172,7 +174,7 @@ export default {
     border-radius: 15px;
 }
 .chip {
-  margin-left: 130px;
+  margin-left: 80px;
   position: absolute;
 }
 .custom-loader {

@@ -1,46 +1,41 @@
 <template>
 <div>
     <v-list
-            dense
-            nav
-            class="text-start"
+            class="text-start white--text"
         >
             <v-list-item
-            link
             :to="{name: 'Home'}"
             >
             <v-list-item-icon>
-                <v-icon>mdi-view-dashboard</v-icon>
+                <v-icon color="white">mdi-view-dashboard</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title>Dashboard</v-list-item-title>
+                <v-list-item-title class="white--text">Dashboard</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
             <v-list-item
-            link
             :to="{name: 'Customers'}"
             >
             <v-list-item-icon>
-                <v-icon>mdi-account-supervisor</v-icon>
+                <v-icon color="white">mdi-account-supervisor</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title>Müşteriler</v-list-item-title>
+                <v-list-item-title class="white--text">Müşteriler</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
             <v-list-item
-            link
             :to="{name: 'Profile'}"
             >
             <v-list-item-icon>
-                <v-icon>mdi-account</v-icon>
+                <v-icon color="white">mdi-account</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title>Profil</v-list-item-title>
+                <v-list-item-title class="white--text">Profil</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -50,11 +45,11 @@
             :to="{name: 'Login'}"
             >
             <v-list-item-icon>
-                <v-icon>mdi-login</v-icon>
+                <v-icon color="white">mdi-login</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title>Giriş Yap</v-list-item-title>
+                <v-list-item-title class="white--text">Giriş Yap</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -64,11 +59,11 @@
             @click="logout"
             >
             <v-list-item-icon>
-                <v-icon>mdi-login</v-icon>
+                <v-icon color="white">mdi-login</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title>Çıkış Yap</v-list-item-title>
+                <v-list-item-title class="white--text">Çıkış Yap</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
         </v-list>

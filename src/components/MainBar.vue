@@ -2,35 +2,37 @@
 <div v-if="!this.$vuetify.breakpoint.mobile" class="fixed-bar">
     <v-card
         :height="$vuetify.breakpoint.height"
-        dark
     >
         <v-navigation-drawer
           permanent
-          :mini-variant.sync="mini"
+          :mini-variant.sync="$store.state.MainBar.isMini"
+          color="#1a1e30"
           >
           <v-btn
               icon
-              v-if="mini"
-              @click.stop="event(); mini = !mini"
+              v-if="$store.state.MainBar.isMini"
+              @click.stop="event(); mini = !mini; $store.state.MainBar.isMini = !$store.state.MainBar.isMini"
             >
-              <v-icon>mdi-chevron-right</v-icon>
+              <v-icon color="white">mdi-chevron-right</v-icon>
             </v-btn>
-        <v-list-item>
+            <v-list>
+        <v-list-item class="white--text">
             <v-list-item-content>
             <v-list-item-title class="text-h6">
                 Veterinary
             </v-list-item-title>
-            <v-list-item-subtitle>
+            <v-list-item-subtitle class="white--text">
                 Admin Panel
             </v-list-item-subtitle>
             </v-list-item-content>
             <v-btn
               icon
-              @click.stop="event(); mini = !mini"
+              @click.stop="event(); mini = !mini; $store.state.MainBar.isMini = !$store.state.MainBar.isMini"
             >
-              <v-icon>mdi-chevron-left</v-icon>
+              <v-icon color="white">mdi-chevron-left</v-icon>
             </v-btn>
         </v-list-item>
+        </v-list>
 
         <v-divider></v-divider>
 
@@ -69,3 +71,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

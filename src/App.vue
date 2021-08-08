@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <v-app>
-      <main-bar @menuClicked="MenuSwitch" @logout="logout"/>
-      <div :class="{'menu-small': isMini, 'menu-large': !isMini}">
+        <main-bar @menuClicked="MenuSwitch" @logout="logout"/>
+        <top-bar />
+      <div :class="{'menu-small': isMini, 'menu-large': !isMini}" class="body">
         <router-view/>
         <v-snackbar v-model="snackbar.value" class="snackbar">{{ snackbar.logoutText }}</v-snackbar>
       </div>
@@ -12,10 +13,12 @@
 
 <script>
 import MainBar from './components/MainBar.vue'
+import TopBar from './components/TopBar.vue'
 export default {
   name: 'App',
   components: {
-    MainBar
+    MainBar,
+    TopBar
   },
   data () {
     return {
@@ -29,7 +32,6 @@ export default {
   methods: {
     MenuSwitch () {
       this.isMini = !this.isMini
-      console.log(this.isMini)
     },
     logout () {
       this.snackbar.value = true
@@ -54,6 +56,17 @@ export default {
   top: 0em;
   left: 0em;
   z-index: 2;
+}
+.toolbar-position {
+  position: fixed;
+  top: 0em;
+  left: 0em;
+  z-index: 2;
+  margin-left: 256px;
+  padding-right: 256px;
+}
+.body {
+  margin-top: 60px;
 }
 .menu-small {
   margin-left:50px;
