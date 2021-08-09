@@ -1,50 +1,62 @@
 <template>
   <div class="body">
     <v-container>
-      <v-form>
+      <v-form v-if="this.$store.state.isUserLoggedIn">
           <div class="form-container mx-auto">
-              <h1>Login</h1>
               <v-col>
+                  <h1 class="mt-5 mb-2">Login</h1>
+                  <h4 class="primary--text mb-7">Veterinary Admin Panel</h4>
                   <v-text-field
+                    class="mr-5 ml-5"
                     v-model="email"
                     label="Email"
                     outlined
+                    autocomplete="off"
+                    persistent-placeholder
                     clearable
                     :rules="rules"
                     hint="ex: vuejs@gmail.com"
+                    prepend-inner-icon="mdi-email"
                   ></v-text-field>
 
                   <v-text-field
+                    class="mr-5 ml-5"
                     v-model="password"
                     type="password"
                     label="Şifre"
                     outlined
+                    autocomplete="off"
+                    persistent-placeholder
                     clearable
                     :rules="rules"
                     hint="Required to be 8 character long minimum"
+                    prepend-inner-icon="mdi-lock-open"
                   ></v-text-field>
               </v-col>
             <v-btn
+              class="mb-7"
               :loading="loading4"
               :disabled="loading4"
               @click="login(); loader = 'loading4'">
-                Giriş Yap
+                Log in
             <template v-slot:loader>
               <span class="custom-loader">
                 <v-icon light>mdi-cached</v-icon>
               </span>
             </template>
           </v-btn>
+          <v-btn
+            color="secondary"
+            elevation="0"
+            plain
+            text
+            small
+            :to="{name: 'Register'}"
+            class="create-acc-btn"><v-icon small>mdi-badge-account-outline</v-icon>Yeni hesap olustur
+          </v-btn>
           <v-alert v-if="alert.value" type="error" max-width="500px" class="mt-5 ma-auto white--text">
             {{alert.message}}
           </v-alert>
-          <br />
-          <br />
-          <br />
-          <h3>test için:</h3>
-          <h3>email: test@gmail.com</h3>
-          <h3>password: test12345</h3>
-          <br />
         </div>
         <v-snackbar
           v-if="snackbar.value"
@@ -112,11 +124,9 @@ export default {
         this.snackbar.message = 'Login işlemi başarılı!'
         this.snackbar.color = 'green'
         this.snackbar.value = true
-        setTimeout(() => { this.snackbar = false }, 5000)
-        setTimeout(() => this.$router.push({
-          name: 'Profile'
-        }), 5000)
-        setTimeout(() => window.location.reload(), 5200)
+        setTimeout(() => { this.snackbar = false }, 2000)
+        this.$router.push({name: 'Profile'})
+        // setTimeout(() => window.location.reload(), 5200)
 
         // Burada profile ait datayı serverdan cekip yine store icinde saklıyoruz.
         const payload = (await AuthenticationService.getUserProfile()).data
@@ -163,9 +173,14 @@ export default {
 }
 .form-container {
     width: 30%;
+    min-height: 450px;
     background: white;
     margin-top: 50px;
     border-radius: 15px;
+}
+.create-acc-btn {
+  position: absolute;
+  margin-top: 60px;
 }
 .custom-loader {
     animation: loader 1s infinite;

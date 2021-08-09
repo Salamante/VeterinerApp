@@ -35,11 +35,6 @@ const moduleToken = {
   mutations: {
     setToken (state, token) {
       state.token = token
-      if (token) {
-        state.Token.isUserLoggedIn = true
-      } else {
-        state.Token.isUserLoggedIn = false
-      }
     }
   },
   actions: {

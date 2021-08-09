@@ -98,6 +98,7 @@ export default {
       email: '',
       password: '',
       name: '',
+      phone: '',
       title: 'SanalDunya Bilisim Tek',
       error: null,
       isRegistered: false,
