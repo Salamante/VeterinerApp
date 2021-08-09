@@ -59,7 +59,7 @@ export default {
   },
   async mounted () {
     // this.user = await JSON.parse(localStorage.getItem('profile'))
-    this.user = await this.$store.state.User.user ? this.$store.state.User.user : 'Ziyaretçi'
+    this.user = await this.$store.state.user ? this.$store.state.user : 'Ziyaretçi'
   },
   methods: {
     async submit (payload) {

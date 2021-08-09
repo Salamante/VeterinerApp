@@ -13,7 +13,7 @@ const moduleMainBar = {
 const moduleUser = {
   state: () => ({
     user: null,
-    isUserLoggedIn: true
+    isUserLoggedIn: false
   }),
   mutations: {
     setUser (state, payload) {
@@ -27,13 +27,45 @@ const moduleUser = {
   }
 }
 
+const moduleToken = {
+  namespaced: true,
+  state: () => ({
+    token: null
+  }),
+  mutations: {
+    setToken (state, token) {
+      state.token = token
+      if (token) {
+        state.Token.isUserLoggedIn = true
+      } else {
+        state.Token.isUserLoggedIn = false
+      }
+    }
+  },
+  actions: {
+    setToken ({commit}, token) {
+      commit('setToken', token)
+    }
+  }
+}
+
+const moduleSnackbar = {
+  state: {
+    value: false,
+    message: '',
+    color: ''
+  }
+}
+
 export default new Vuex.Store({
   plugins: [createPersistedState({
     storage: window.sessionStorage
   })],
   modules: {
     MainBar: moduleMainBar,
-    User: moduleUser
+    User: moduleUser,
+    Token: moduleToken,
+    Snackbar: moduleSnackbar
   },
   state: {
     token: null,

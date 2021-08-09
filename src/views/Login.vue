@@ -24,15 +24,6 @@
                     hint="Required to be 8 character long minimum"
                   ></v-text-field>
               </v-col>
-              <div id="error">
-                <v-alert
-                  type="error"
-                  v-if="error"
-                  class="mr-10 mt-2"
-                  color="pink">
-                  {{error}}
-                </v-alert>
-              </div>
             <v-btn
               :loading="loading4"
               :disabled="loading4"
@@ -44,19 +35,25 @@
               </span>
             </template>
           </v-btn>
+          <v-alert v-if="alert.value" type="error" max-width="500px" class="mt-5 ma-auto white--text">
+            {{alert.message}}
+          </v-alert>
           <br />
           <br />
           <br />
           <h3>test için:</h3>
-          <h3>email: coskuntest@gmail.com</h3>
-          <h3>password: test123456</h3>
+          <h3>email: test@gmail.com</h3>
+          <h3>password: test12345</h3>
           <br />
         </div>
         <v-snackbar
-          v-if="snackbar"
-          v-model="snackbar"
+          v-if="snackbar.value"
+          v-model="snackbar.value"
+          :color="snackbar.color"
+          top
+          right
         >
-          Giriş Başarılı!
+          {{snackbar.message}}
         </v-snackbar>
       </v-form>
     </v-container>
@@ -70,14 +67,21 @@ export default {
     return {
       email: '',
       password: '',
-      error: null,
+      alert: {
+        value: false,
+        message: ''
+      },
       isRegistered: false,
       rules: [
         value => !!value || 'Gerekli'
       ],
       loader: null,
       loading4: false,
-      snackbar: false,
+      snackbar: {
+        value: false,
+        message: '',
+        color: ''
+      },
       response: null
     }
   },
@@ -90,7 +94,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$store.state.User.isUserLoggedIn)
+    console.log(this.$store.state.isUserLoggedIn)
   },
   methods: {
     async login () {
@@ -102,8 +106,17 @@ export default {
         // Burada login olduktan sonra serverdan gelen payload u Vuex store(./store/store.js) icinde saklıyoruz.
         const token = this.response.data.access
         this.$store.dispatch('setToken', token)
+        console.log('token: ' + this.$store.state.token)
         localStorage.setItem('accessToken', token)
         localStorage.setItem('refreshToken', this.response.data.refresh)
+        this.snackbar.message = 'Login işlemi başarılı!'
+        this.snackbar.color = 'green'
+        this.snackbar.value = true
+        setTimeout(() => { this.snackbar = false }, 5000)
+        setTimeout(() => this.$router.push({
+          name: 'Profile'
+        }), 5000)
+        setTimeout(() => window.location.reload(), 5200)
 
         // Burada profile ait datayı serverdan cekip yine store icinde saklıyoruz.
         const payload = (await AuthenticationService.getUserProfile()).data
@@ -111,16 +124,11 @@ export default {
         localStorage.setItem('profile', JSON.stringify(payload))
 
         // Login olduktan sonra /profile e yonlendiriyor.
-
-        this.snackbar = true
-        setTimeout(() => { this.snackbar = false }, 2000)
-        setTimeout(() => this.$router.push({
-          name: 'Profile'
-        }), 1500)
-        setTimeout(() => window.location.reload(), 1700)
       } catch (err) {
-        console.log(err)
-        setTimeout(() => { this.error = null }, 2000)
+        console.log(err.response.data.detail)
+        this.alert.message = String(err.response.data.detail)
+        this.alert.value = true
+        setTimeout(() => { this.alert.value = false }, 10000)
       }
     },
     alertPopUp () {

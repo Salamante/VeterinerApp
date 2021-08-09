@@ -1,11 +1,11 @@
 <template>
   <div class="body">
-    <v-container>
+    <v-container v-if="!isRegistered">
       <v-form>
           <div class="form-container mx-auto">
               <h1>REGISTER</h1>
               <v-col class="pr-4 pl-4"
-                v-if="!isRegistered">
+                >
                   <h4 class="text-start mb-2">Email</h4>
                   <v-text-field
                     v-model="email"
@@ -76,10 +76,14 @@
           ><v-icon class="mr-1">mdi-home</v-icon>Anasayfa</v-chip>
         </div>
         <v-snackbar
-          v-if="snackbar"
-          v-model="snackbar"
+          class="ma-auto"
+          top
+          right
+          v-if="snackbar.value"
+          v-model="snackbar.value"
+          :color="snackbar.color"
         >
-          Registeration is Successful
+          {{snackbar.message}}
         </v-snackbar>
       </v-form>
     </v-container>
@@ -102,7 +106,11 @@ export default {
       ],
       loader: null,
       loading4: false,
-      snackbar: false
+      snackbar: {
+        value: false,
+        message: '',
+        color: ''
+      }
     }
   },
   computed: {
@@ -125,16 +133,20 @@ export default {
         const response = await AuthenticationService.register(
           this.user
         )
-        this.$store.dispatch('setToken', response.data.token)
-        alert(`${response.data.access}`)
+        this.$store.dispatch('setUser', response.data)
         setTimeout(() => { this.isRegistered = true }, 250)
-        this.snackbar = true
-        setTimeout(() => { this.snackbar = false }, 2000)
-        // setTimeout(() => this.$router.push({
-        //   name: 'root'
-        // }), 1500)
+        this.snackbar.value = true
+        this.snackbar.color = 'green'
+        setTimeout(() => { this.snackbar.value = false }, 9000)
+        setTimeout(() => this.$router.push({
+          name: 'Home'
+        }), 9000)
       } catch (error) {
-        console.log(this.error)
+        console.log(error.response.data)
+        this.snackbar.message = error.response.data.password ? `${error.response.data.password}` : `${error.response.data.email}`
+        this.snackbar.color = 'red'
+        this.snackbar.value = true
+        setTimeout(() => { this.snackbar.value = false }, 2000)
       }
     },
     alertPopUp () {

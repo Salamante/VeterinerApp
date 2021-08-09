@@ -1,11 +1,10 @@
 <template>
   <div id="app">
     <v-app>
-        <main-bar @menuClicked="MenuSwitch" @logout="logout" v-if="this.$store.state.User.isUserLoggedIn"/>
-        <top-bar v-if="this.$store.state.User.isUserLoggedIn"/>
-      <div :class="{'not-logged-in': !this.$store.state.User.isUserLoggedIn, 'menu-small': isMini, 'menu-large': !isMini}" class="body">
+        <main-bar @menuClicked="MenuSwitch" @logout="logout" v-if="this.$store.state.isUserLoggedIn"/>
+        <top-bar v-if="this.$store.state.isUserLoggedIn"/>
+      <div :class="{'not-logged-in': !this.$store.state.isUserLoggedIn, 'menu-small': isMini, 'menu-large': !isMini}" class="body">
         <router-view/>
-        <v-snackbar v-model="snackbar.value" class="snackbar">{{ snackbar.logoutText }}</v-snackbar>
       </div>
     </v-app>
   </div>
@@ -22,11 +21,7 @@ export default {
   },
   data () {
     return {
-      isMini: false,
-      snackbar: {
-        value: false,
-        logoutText: 'Logged Out!'
-      }
+      isMini: false
     }
   },
   methods: {
@@ -34,9 +29,8 @@ export default {
       this.isMini = !this.isMini
     },
     logout () {
-      this.snackbar.value = true
-      setTimeout(() => { this.snackbar.value = false }, 2000)
       sessionStorage.clear()
+      console.log(this.$store.state.user)
     }
   }
 }
@@ -79,9 +73,5 @@ export default {
   left: 0em !important;
   margin: 0 !important;
   padding: 0 !important;
-}
-.snackbar {
-  position: absolute;
-  margin: auto;
 }
 </style>
