@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <v-app>
-        <main-bar @menuClicked="MenuSwitch" @logout="logout"/>
-        <top-bar />
-      <div :class="{'menu-small': isMini, 'menu-large': !isMini}" class="body">
+        <main-bar @menuClicked="MenuSwitch" @logout="logout" v-if="this.$store.state.User.isUserLoggedIn"/>
+        <top-bar v-if="this.$store.state.User.isUserLoggedIn"/>
+      <div :class="{'not-logged-in': !this.$store.state.User.isUserLoggedIn, 'menu-small': isMini, 'menu-large': !isMini}" class="body">
         <router-view/>
         <v-snackbar v-model="snackbar.value" class="snackbar">{{ snackbar.logoutText }}</v-snackbar>
       </div>
@@ -73,6 +73,12 @@ export default {
 }
 .menu-large {
   margin-left: 256px;
+}
+.not-logged-in {
+  top: 0em !important;
+  left: 0em !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .snackbar {
   position: absolute;

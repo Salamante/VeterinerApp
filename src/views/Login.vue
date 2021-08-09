@@ -90,6 +90,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.$store.state.User.isUserLoggedIn)
   },
   methods: {
     async login () {

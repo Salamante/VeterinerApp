@@ -13,7 +13,7 @@ const moduleMainBar = {
 const moduleUser = {
   state: () => ({
     user: null,
-    isUserloggedIn: false
+    isUserLoggedIn: true
   }),
   mutations: {
     setUser (state, payload) {

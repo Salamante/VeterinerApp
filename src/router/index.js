@@ -1,20 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import calendar from '@/components/calendar'
+import store from '@/store/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/home',
       name: 'Home',
+      meta: {requiresAuth: true},
       component: () => import('../views/Home')
     },
     {
       path: '/appointment',
       name: 'Appointment',
-      component: calendar
+      component: calendar,
+      meta: {requiresAuth: true}
     },
     {
       path: '/register',
@@ -29,17 +32,36 @@ export default new Router({
     {
       path: '/profile',
       name: 'Profile',
+      meta: {requiresAuth: true},
       component: () => import('../views/Profile')
     },
     {
       path: '/customers',
       name: 'Customers',
+      meta: {requiresAuth: true},
       component: () => import('../views/Customers')
     },
     {
       path: '/Animals',
       name: 'Animals',
+      meta: {requiresAuth: true},
       component: () => import('../views/Animals')
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    if (!store.state.User.isUserLoggedIn) {
+      next({
+        name: 'Login'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
