@@ -43,20 +43,8 @@ export default {
       }
     )
   },
-  getCustomers () {
-    const token = localStorage.getItem('accessToken')
-    return Api().get('api/customers/', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-  },
-  createCustomer (customer) {
-    const token = localStorage.getItem('accessToken')
-    return Api().post('/api/customers', customer, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+  refreshToken () {
+    const token = localStorage.getItem('refreshToken')
+    return Api().post('/api/customers', token)
   }
 }

@@ -47,8 +47,8 @@
             <v-icon>mdi-bell-ring</v-icon>
         </v-btn>
         <v-divider vertical></v-divider>
-        <v-btn icon class=" ml-2">
-        <v-icon>mdi-export</v-icon>
+        <v-btn v-if="this.$store.state.isUserLoggedIn" icon class=" ml-2">
+        <v-icon>mdi-logout</v-icon>
       </v-btn>
   </v-toolbar>
 </template>

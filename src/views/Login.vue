@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <v-container>
-      <v-form v-if="this.$store.state.isUserLoggedIn">
+      <v-form v-if="!this.$store.state.isUserLoggedIn">
           <div class="form-container mx-auto">
               <v-col>
                   <h1 class="mt-5 mb-2">Login</h1>
@@ -68,6 +68,10 @@
           {{snackbar.message}}
         </v-snackbar>
       </v-form>
+      <div v-if="this.$store.state.isUserLoggedIn" class="ma-auto">
+        <h3 class="white--text mt-16"><span class="black--text">{{this.$store.state.user.name.toUpperCase()}}</span> olarak giriş yaptınız.</h3>
+        <v-btn text plain :to="{name: 'Home'}">Anasayfa</v-btn>
+      </div>
     </v-container>
   </div>
 </template>
