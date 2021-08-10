@@ -202,14 +202,6 @@
         mdi-delete
       </v-icon>
     </template>
-    <template v-slot:no-data>
-      <v-btn
-        color="primary"
-        @click="initialize"
-      >
-        Reset
-      </v-btn>
-    </template>
   </v-data-table>
 </v-container>
 </template>
@@ -263,15 +255,8 @@ export default {
     }
   }),
   async mounted () {
-    try {
-      const response = (await CustomerService.getAllCustomers()).data
-      response.forEach(element => {
-        this.customers.push(element)
-      })
-      console.log(this.customers)
-    } catch (err) {
-      console.log(err.response)
-    }
+    const res = await CustomerService.getCustomer(5)
+    console.log(res.data)
   },
   computed: {
     customer () {
@@ -292,12 +277,20 @@ export default {
   },
 
   created () {
-    // this.initialize()
+    this.initialize()
   },
 
   methods: {
-    initialize () {
-      this.customers = []
+    async initialize () {
+      try {
+        const response = (await CustomerService.getAllCustomers()).data
+        response.forEach(element => {
+          this.customers.push(element)
+        })
+        console.log(this.customers)
+      } catch (err) {
+        console.log(err.response)
+      }
     },
 
     editItem (item) {
@@ -307,14 +300,21 @@ export default {
     },
 
     deleteItem (item) {
-      this.editedIndex = this.customers.indexOf(item)
-      this.editedItem = Object.assign({}, item)
+      this.editedIndex = item.id
       this.dialogDelete = true
     },
 
-    deleteItemConfirm () {
-      this.customers.splice(this.editedIndex, 1)
-      this.closeDelete()
+    async deleteItemConfirm () {
+      try {
+        const response = await CustomerService.deleteCustomer(this.editedIndex)
+        console.log(response.data)
+        this.closeDelete()
+        this.$nextTick(() => {
+          window.location.reload()
+        })
+      } catch (err) {
+        console.log(err.response)
+      }
     },
 
     close () {
@@ -327,10 +327,6 @@ export default {
 
     closeDelete () {
       this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
     },
 
     async save () {
