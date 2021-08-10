@@ -1,12 +1,14 @@
 <template>
 <div>
+  <customer-table />
 </div>
 </template>
 
 <script>
+import CustomerTable from '../components/CustomerTable.vue'
 
 export default {
-  components: {},
+  components: {CustomerTable},
   data () {
     return {
 

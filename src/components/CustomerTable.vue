@@ -3,7 +3,7 @@
   <v-data-table
     :headers="headers"
     :items="customers"
-    sort-by="email"
+    sort-by="first_name"
     class="elevation-1"
     :search="search"
   >
@@ -38,7 +38,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              New Item
+              Müşteri Ekle
             </v-btn>
           </template>
           <v-card>
@@ -55,8 +55,28 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.name"
-                      label="Customer name"
+                      v-model="editedItem.first_name"
+                      label="İsim"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.last_name"
+                      label="Soyisim"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.phone"
+                      label="Telefon"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -75,8 +95,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.disctrict"
-                      label="disctrict (g)"
+                      v-model="editedItem.tax_vkn_number"
+                      label="Tax VKN Numarası"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -85,8 +105,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.color"
-                      label="color (g)"
+                      v-model="editedItem.tax_office"
+                      label="Vergi Dairesi"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -95,8 +115,40 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.productType"
-                      label="productType (g)"
+                      v-model="editedItem.district"
+                      type="number"
+                      label="district"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.city"
+                      type="number"
+                      label="şehir"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.address"
+                      label="Adres"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.description"
+                      label="Açıklama"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -110,14 +162,14 @@
                 text
                 @click="close"
               >
-                Cancel
+                İptal
               </v-btn>
               <v-btn
                 color="blue darken-1"
                 text
                 @click="save"
               >
-                Save
+                Kaydet
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -163,6 +215,8 @@
 </template>
 
 <script>
+import CustomerService from '@/services/CustomerService'
+
 export default {
   data: () => ({
     search: '',
@@ -170,38 +224,61 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: 'Customer',
+        text: 'Müşteri',
         align: 'start',
         sortable: false,
-        value: 'name'
+        value: 'first_name'
       },
       { text: 'Email', value: 'email' },
-      { text: 'Şehir', value: 'disctrict' },
-      { text: 'Renk', value: 'color' },
-      { text: 'Ürün Tipi', value: 'productType' },
+      { text: 'Telefon', value: 'phone' },
+      { text: 'Şehir', value: 'city.name' },
+      { text: 'District', value: 'district.name' },
       { text: 'Actions', value: 'actions', sortable: false }
     ],
     customers: [],
     editedIndex: -1,
     editedItem: {
-      name: '',
+      first_name: '',
+      last_name: '',
+      phone: '',
       email: '',
-      disctrict: '',
-      color: '',
-      productType: ''
+      description: '',
+      tax_vkn_number: '',
+      tax_office: '',
+      address: '',
+      district: Number(this.district),
+      city: Number(this.city)
     },
     defaultItem: {
-      name: '',
+      first_name: '',
+      last_name: '',
+      phone: '',
       email: '',
-      disctrict: '',
-      color: '',
-      productType: ''
+      description: '',
+      tax_vkn_number: '',
+      tax_office: '',
+      address: '',
+      district: Number(this.district),
+      city: Number(this.city)
     }
   }),
-
+  async mounted () {
+    try {
+      const response = (await CustomerService.getAllCustomers()).data
+      response.forEach(element => {
+        this.customers.push(element)
+      })
+      console.log(this.customers)
+    } catch (err) {
+      console.log(err.response)
+    }
+  },
   computed: {
+    customer () {
+      return this.editedItem
+    },
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? 'Yeni Müşteri' : 'Müşteriyi Güncelle'
     }
   },
 
@@ -215,83 +292,12 @@ export default {
   },
 
   created () {
-    this.initialize()
+    // this.initialize()
   },
 
   methods: {
     initialize () {
-      this.customers = [
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        },
-        {
-          name: 'Ahmet Huseyin',
-          email: 'ahmet@gmail.com',
-          disctrict: 'İstanbul',
-          color: 'Sarı',
-          productType: 'Aşı'
-        }
-      ]
+      this.customers = []
     },
 
     editItem (item) {
@@ -327,12 +333,13 @@ export default {
       })
     },
 
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.customers[this.editedIndex], this.editedItem)
-      } else {
-        this.customers.push(this.editedItem)
-      }
+    async save () {
+      // try {
+      //   const response = await CustomerService.createCustomer(this.customer)
+      //   console.log(response)
+      // } catch (err) {
+      //   console.log(err.response.data)
+      // }
       this.close()
     }
   }

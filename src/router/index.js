@@ -42,10 +42,15 @@ const router = new Router({
       component: () => import('../views/Customers')
     },
     {
-      path: '/Animals',
+      path: '/animals',
       name: 'Animals',
       meta: {requiresAuth: true},
       component: () => import('../views/Animals')
+    },
+    {
+      path: '/boilerplate',
+      name: 'BoilerPlate',
+      component: () => import('../components/BoilerPlate')
     }
   ]
 })

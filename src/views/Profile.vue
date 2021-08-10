@@ -18,7 +18,7 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-snackbar v-model="snackbar" color="red" top rounded="pill">Şifre değiştirme başarılı!</v-snackbar>
+        <v-snackbar v-if="snackbar.value" v-model="snackbar.value" color="red" top right>{{snackbar.message}}</v-snackbar>
       </v-container>
     </div>
 </template>
@@ -54,12 +54,22 @@ export default {
       emailToChange: '',
       oldPass: '',
       newPass: '',
-      snackbar: false
+      snackbar: {
+        value: false,
+        message: '',
+        color: ''
+      }
     }
   },
   async mounted () {
     // this.user = await JSON.parse(localStorage.getItem('profile'))
     this.user = await this.$store.state.user ? this.$store.state.user : 'Ziyaretçi'
+    const text = {
+      name: 'cosk',
+      num: '16'
+    }
+    text.num = Number(text.num)
+    console.log(typeof (text.num))
   },
   methods: {
     async submit (payload) {
@@ -76,10 +86,14 @@ export default {
       this.newPass = payload.emitedNewPassword
       try {
         await AuthenticationService.changePassword(this.oldPass, this.newPass)
+        this.snackbar.message = 'Şifre başarıyla değiştirildi'
         this.snackbar.value = true
-        setTimeout(() => { this.snackbar.value = false }, 2000)
+        setTimeout(() => { this.snackbar.value = false }, 5000)
       } catch (err) {
         console.log(err)
+        this.snackbar.message = String(err.response.data)
+        this.snackbar.value = true
+        setTimeout(() => { this.snackbar.value = false }, 5000)
       }
     },
     changeEmail (payload) {

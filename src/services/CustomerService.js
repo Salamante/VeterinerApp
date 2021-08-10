@@ -11,7 +11,7 @@ export default {
   },
   createCustomer (customer) {
     const token = localStorage.getItem('accessToken')
-    return Api().post('/api/customers', customer, {
+    return Api().post('/api/customers/', customer, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
