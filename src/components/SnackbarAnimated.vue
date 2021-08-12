@@ -8,14 +8,16 @@
       >
         Button
       </v-btn>
-    <v-snackbar
-        top
-        right
-        v-if="snackbar"
-        v-model="snackbar"
-    >
-        DENEME
-    </v-snackbar>
+      <transition name="bounce">
+        <v-snackbar
+            centered
+            v-model="snackbar"
+            v-if="snackbar"
+            timeout="3000"
+        >
+            DENEMEeee
+        </v-snackbar>
+      </transition>
     </div>
 </template>
 
@@ -28,7 +30,7 @@ export default {
   },
   methods: {
     log () {
-      this.snackbar = true
+      this.snackbar = !this.snackbar
       console.log(this.snackbar)
     }
   }

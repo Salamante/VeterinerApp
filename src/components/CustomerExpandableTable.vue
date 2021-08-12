@@ -7,7 +7,7 @@
       :expanded.sync="expanded"
       item-key="first_name"
       show-expand
-      class="elevation-1 test"
+      class="elevation-1"
     >
       <template v-slot:expanded-item="{ headers, item }">
         <td :colspan="headers.length">More info about {{ item.first_name }}</td>

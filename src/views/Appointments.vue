@@ -1,5 +1,6 @@
 <template>
   <div class="body">
+      <snackbar-animated />
     <v-container>
       <v-form>
           <div class="form-container mx-auto">
@@ -10,8 +11,8 @@
                   <v-select
                     v-model="select"
                     :items="items"
-                    item-text="state"
-                    item-value="abbr"
+                    item-text="name"
+                    item-value="id"
                     label="Select"
                     persistent-hint
                     return-object
@@ -19,10 +20,10 @@
                     ></v-select>
 
                   <h4 class="text-start mb-2">Tarih</h4>
-                  <calendar />
+                  <calendar @input="updateDate"/>
 
                   <h4 class="text-start mb-2">Saat</h4>
-                  <time-picker />
+                  <time-picker @input="updateTime"/>
 
                   <h4 class="text-start mb-2">Açıklama</h4>
                     <v-textarea
@@ -30,6 +31,7 @@
                        clear-icon="mdi-close-circle"
                        label="Açıklama girin"
                        :value="description"
+                       v-model="description"
                     ></v-textarea>
               </v-col>
               <div id="error">
@@ -44,7 +46,7 @@
             <v-btn
               :loading="loading4"
               :disabled="loading4"
-              @click="loader = 'loading4'" class="mb-6">
+              @click="loader = 'loading4'; createAppointment()" class="mb-6">
                 Randevu Oluştur
             <template v-slot:loader>
               <span class="custom-loader">
@@ -62,8 +64,11 @@
         </div>
         <v-snackbar
           class="ma-auto"
-          top
+          bottom
           right
+          app
+          timeout="3000"
+          transition="scale-transition"
           v-if="snackbar.value"
           v-model="snackbar.value"
           :color="snackbar.color"
@@ -76,23 +81,25 @@
 </template>
 
 <script>
-import Calendar from '../components/Calendar.vue'
+import AppointmentService from '@/services/AppointmentService'
+import AnimalService from '@/services/AnimalService'
 import TimePicker from '../components/TimePicker.vue'
+import Calendar from '../components/Calendar.vue'
+import BoilerPlate from '../components/BoilerPlate.vue'
+import SnackbarAnimated from '../components/SnackbarAnimated.vue'
 export default {
   components: {
+    TimePicker,
     Calendar,
-    TimePicker
+    BoilerPlate,
+    SnackbarAnimated
   },
   data () {
     return {
-      select: { state: 'Florida', abbr: 'FL' },
-      items: [
-        { state: 'Florida', abbr: 'FL' },
-        { state: 'Georgia', abbr: 'GA' },
-        { state: 'Nebraska', abbr: 'NE' },
-        { state: 'California', abbr: 'CA' },
-        { state: 'New York', abbr: 'NY' }
-      ],
+      date: '',
+      time: '',
+      select: { },
+      items: [],
       description: '',
       error: null,
       rules: [
@@ -108,24 +115,51 @@ export default {
     }
   },
   computed: {
-    user () {
+    appointment () {
       return {
-        email: this.email,
-        password: this.password,
-        title: this.title,
-        name: this.name,
-        phone: this.phone
+        animal: this.select.id,
+        day: this.date,
+        time: this.time,
+        description: this.description
       }
     }
   },
+  created () {
+    this.getAllAnimals()
+  },
   methods: {
-    async register () {
+    async getAllAnimals () {
       try {
+        const response = (await AnimalService.getAllAnimals()).data
+        response.forEach(element => {
+          this.items.push(element)
+        })
+        console.log(this.items)
       } catch (error) {
         console.log(error.response.data)
       }
     },
-    alertPopUp () {
+    async createAppointment () {
+      try {
+        const response = (await AppointmentService.createAppointment(this.appointment)).data
+        console.log(response)
+        this.snackbar.message = 'Randevu oluşturuldu'
+        this.snackbar.color = 'green'
+        this.snackbar.value = true
+      } catch (err) {
+        console.log(err.response)
+        this.snackbar.message = err.response.data
+        this.snackbar.color = 'red'
+        this.snackbar.value = true
+      }
+    },
+    updateDate (payload) {
+      this.date = payload
+      console.log(this.date)
+    },
+    updateTime (payload) {
+      this.time = payload
+      console.log(this.time)
     }
   },
   watch: {

@@ -25,7 +25,7 @@
           <v-date-picker
             v-model="date"
             no-title
-            @input="menu1 = false"
+            @input="menu1 = false, $emit('input', $event)"
           ></v-date-picker>
         </v-menu>
       </v-col>
@@ -37,8 +37,7 @@ export default {
   data: vm => ({
     date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
-    menu1: false,
-    menu2: false
+    menu1: false
   }),
 
   computed: {

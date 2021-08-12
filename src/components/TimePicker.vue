@@ -28,6 +28,7 @@
           v-model="time"
           full-width
           @click:minute="$refs.menu.save(time)"
+          @input="$emit('input', $event)"
         ></v-time-picker>
       </v-menu>
     </v-col>
