@@ -64,12 +64,6 @@ export default {
   async mounted () {
     // this.user = await JSON.parse(localStorage.getItem('profile'))
     this.user = await this.$store.state.user ? this.$store.state.user : 'Ziyaretçi'
-    const text = {
-      name: 'cosk',
-      num: '16'
-    }
-    text.num = Number(text.num)
-    console.log(typeof (text.num))
   },
   methods: {
     async submit (payload) {

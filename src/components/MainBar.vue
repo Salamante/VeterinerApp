@@ -34,7 +34,7 @@
         </v-list-item>
         </v-list>
 
-        <v-divider></v-divider>
+        <v-divider class="divider"></v-divider>
 
         <main-bar-list @loggedOut="logout"/>
 
@@ -73,5 +73,7 @@ export default {
 </script>
 
 <style scoped>
-
+.divider {
+  background: white;
+}
 </style>

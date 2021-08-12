@@ -219,13 +219,14 @@ export default {
         text: 'Müşteri',
         align: 'start',
         sortable: false,
-        value: 'first_name'
+        value: 'first_name',
+        class: 'black--text text-h5'
       },
-      { text: 'Email', value: 'email' },
-      { text: 'Telefon', value: 'phone' },
-      { text: 'Şehir', value: 'city.name' },
-      { text: 'District', value: 'district.name' },
-      { text: 'Actions', value: 'actions', sortable: false }
+      { text: 'Email', value: 'email', class: 'black--text text-h5' },
+      { text: 'Telefon', value: 'phone', class: 'black--text text-h5' },
+      { text: 'Şehir', value: 'city.name', class: 'black--text text-h5' },
+      { text: 'District', value: 'district.name', class: 'black--text text-h5' },
+      { text: 'Actions', value: 'actions', sortable: false, class: 'black--text text-h5' }
     ],
     customers: [],
     editedIndex: -1,

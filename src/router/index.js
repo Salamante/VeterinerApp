@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import calendar from '@/components/calendar'
 import store from '@/store/store'
 
 Vue.use(Router)
@@ -9,15 +8,16 @@ const router = new Router({
   routes: [
     {
       path: '/home',
+      alias: '/',
       name: 'Home',
       meta: {requiresAuth: true},
       component: () => import('../views/Home')
     },
     {
       path: '/appointment',
-      name: 'Appointment',
-      component: calendar,
-      meta: {requiresAuth: true}
+      name: 'Appointments',
+      meta: {requiresAuth: true},
+      component: () => import('../views/Appointments')
     },
     {
       path: '/register',

@@ -130,7 +130,7 @@ export default {
         this.snackbar.value = true
         setTimeout(() => { this.snackbar = false }, 2000)
         this.$router.push({name: 'Profile'})
-        // setTimeout(() => window.location.reload(), 5200)
+        setTimeout(() => window.location.reload(), 2200)
 
         // Burada profile ait datayı serverdan cekip yine store icinde saklıyoruz.
         const payload = (await AuthenticationService.getUserProfile()).data

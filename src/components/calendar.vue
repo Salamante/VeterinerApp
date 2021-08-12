@@ -1,73 +1,77 @@
 <template>
-<v-app class="container">
     <v-row>
       <v-col
-        cols="12"
-        sm="6"
-        md="4"
       >
         <v-menu
-          ref="menu"
-          v-model="menu"
+          ref="menu1"
+          v-model="menu1"
           :close-on-content-click="false"
-          :return-value.sync="date"
           transition="scale-transition"
           offset-y
+          max-width="290px"
           min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-              v-model="date"
-              label="Picker in menu"
+              class="field"
+              v-model="dateFormatted"
+              persistent-hint
               prepend-icon="mdi-calendar"
-              readonly
               v-bind="attrs"
+              @blur="date = parseDate(dateFormatted)"
               v-on="on"
             ></v-text-field>
           </template>
           <v-date-picker
             v-model="date"
             no-title
-            scrollable
-          >
-            <v-spacer></v-spacer>
-            <v-btn
-              text
-              color="primary"
-              @click="menu = false"
-            >
-              Cancel
-            </v-btn>
-            <v-btn
-              text
-              color="primary"
-              @click="$refs.menu.save(date)"
-            >
-              OK
-            </v-btn>
-          </v-date-picker>
+            @input="menu1 = false"
+          ></v-date-picker>
         </v-menu>
       </v-col>
-      <v-spacer></v-spacer>
     </v-row>
-</v-app>
 </template>
 
 <script>
 export default {
-  data: () => ({
+  data: vm => ({
     date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-    menu: false,
-    modal: false,
+    dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
+    menu1: false,
     menu2: false
-  })
+  }),
+
+  computed: {
+    computedDateFormatted () {
+      return this.formatDate(this.date)
+    }
+  },
+
+  watch: {
+    date (val) {
+      this.dateFormatted = this.formatDate(this.date)
+    }
+  },
+
+  methods: {
+    formatDate (date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
+    },
+    parseDate (date) {
+      if (!date) return null
+
+      const [month, day, year] = date.split('/')
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    }
+  }
 }
 </script>
 
 <style scoped>
-.container {
-  max-height: 100px;
-  margin: 0;
-  padding: 0;
+.field {
+  min-width: 200px;
 }
 </style>

@@ -28,6 +28,30 @@
             </v-list-item>
 
             <v-list-item
+            :to="{name: 'Animals'}"
+            >
+            <v-list-item-icon>
+                <v-icon color="white">mdi-account-supervisor</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+                <v-list-item-title class="white--text">Hayvanlar</v-list-item-title>
+            </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item
+            :to="{name: 'Appointments'}"
+            >
+            <v-list-item-icon>
+                <v-icon color="white">mdi-calendar-month</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+                <v-list-item-title class="white--text">Randevular</v-list-item-title>
+            </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item
             :to="{name: 'Profile'}"
             >
             <v-list-item-icon>
@@ -38,6 +62,8 @@
                 <v-list-item-title class="white--text">Profil</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
+
+            <v-divider class="divider"></v-divider>
 
             <v-list-item
             v-if="!this.$store.state.isUserLoggedIn"
@@ -91,5 +117,8 @@ export default {
 <style scoped>
 .font {
   font-family: Arial, Helvetica, sans-serif ;
+}
+.divider {
+  background: white;
 }
 </style>

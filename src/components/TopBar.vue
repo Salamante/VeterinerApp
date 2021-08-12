@@ -1,8 +1,9 @@
 <template>
+<div class="toolbar">
   <v-toolbar
-    class="toolbar-position"
+    class="toolbar-position toolbar"
     :class="{'small-menu': $store.state.MainBar.isMini}"
-    flat
+    elevation="1"
     color="white"
     :width="$vuetify.breakpoint.width"
     >
@@ -23,34 +24,35 @@
                         src="https://www.vscnl.ca/wp-content/uploads/2020/06/Dr-Laura-Rogers-Avatar-FAA.png"
                         ></v-img>
                     </v-avatar>
-                    <span>{{name}}</span>
+                    <span class="list-hover">{{name}}</span>
                 </v-btn>
             </template>
             <v-list class="text-start mt-1">
-                <v-list-item link dense :disabled="!this.$store.state.User.isUserLoggedIn">
+                <v-list-item link dense :disabled="this.$store.state.User.isUserLoggedIn">
                     <v-list-item-title><v-icon class="mr-3" color="black" small>mdi-account</v-icon>My Profile</v-list-item-title>
                 </v-list-item>
-                <v-list-item link dense>
+                <v-list-item link dense class="list-hover">
                     <v-list-item-title><v-icon class="mr-3" color="black" small>mdi-cog</v-icon>Settings</v-list-item-title>
                 </v-list-item>
-                <v-list-item link dense>
+                <v-list-item link dense class="list-hover">
                     <v-list-item-title><v-icon class="mr-3" color="black" small>mdi-mail</v-icon>Messages</v-list-item-title>
                 </v-list-item>
-                <v-list-item link dense v-if="this.$store.state.User.isUserLoggedIn">
+                <v-list-item link dense class="list-hover" v-if="this.$store.state.User.isUserLoggedIn">
                     <v-divider></v-divider>
                     <v-list-item-title><v-icon class="mr-3" color="black" small>mdi-logout</v-icon>Log Out</v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-menu>
         <v-divider vertical></v-divider>
-        <v-btn icon class="mr-3 ml-3">
+        <v-btn icon plain class="mr-3 ml-3 list-hover">
             <v-icon>mdi-bell-ring</v-icon>
         </v-btn>
         <v-divider vertical></v-divider>
-        <v-btn v-if="this.$store.state.isUserLoggedIn" icon class=" ml-2">
-        <v-icon>mdi-logout</v-icon>
+        <v-btn v-if="this.$store.state.isUserLoggedIn" icon plain class="list-hover ml-2">
+        <v-icon >mdi-logout</v-icon>
       </v-btn>
   </v-toolbar>
+  </div>
 </template>
 
 <script>
@@ -60,9 +62,10 @@ export default {
       name: null
     }
   },
-  mounted () {
-    if (this.$store.state.User.user) {
-      this.name = this.$store.state.User.user.name
+  created () {
+    console.log(this.$store.state.isUserLoggedIn)
+    if (this.$store.state.user) {
+      this.name = this.$store.state.user.name
     } else {
       this.name = 'Ziyaretçi'
     }
@@ -71,6 +74,10 @@ export default {
 </script>
 
 <style scoped>
+.toolbar {
+  border-bottom: 1px rgb(196, 196, 196) solid;
+  display: block;
+}
 .small-menu {
     margin-left: 56px !important;
     padding-right: 56px !important
@@ -81,5 +88,8 @@ export default {
 .profile-button {
     width: 160px;
     min-height: 60px;
+}
+.list-hover:hover {
+  color: blue !important;
 }
 </style>
