@@ -1,6 +1,5 @@
 <template>
   <div class="body">
-      <snackbar-animated />
     <v-container>
       <v-form>
           <div class="form-container mx-auto">
@@ -85,14 +84,10 @@ import AppointmentService from '@/services/AppointmentService'
 import AnimalService from '@/services/AnimalService'
 import TimePicker from '../components/TimePicker.vue'
 import Calendar from '../components/Calendar.vue'
-import BoilerPlate from '../components/BoilerPlate.vue'
-import SnackbarAnimated from '../components/SnackbarAnimated.vue'
 export default {
   components: {
     TimePicker,
-    Calendar,
-    BoilerPlate,
-    SnackbarAnimated
+    Calendar
   },
   data () {
     return {

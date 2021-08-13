@@ -1,21 +1,5 @@
 <template>
 <div>
-    <v-btn
-        outlined
-        rounded
-        text
-        @click="log"
-      >
-        Button
-      </v-btn>
-    <v-snackbar
-        top
-        right
-        v-if="snackbar"
-        v-model="snackbar"
-    >
-        DENEME
-    </v-snackbar>
     </div>
 </template>
 
