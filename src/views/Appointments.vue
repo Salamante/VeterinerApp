@@ -82,8 +82,8 @@
 <script>
 import AppointmentService from '@/services/AppointmentService'
 import AnimalService from '@/services/AnimalService'
-import TimePicker from '../components/TimePicker'
-import Calendar from '../components/Calendar'
+import TimePicker from '../components/TimePicker.vue'
+import Calendar from '../components/Calendar.vue'
 export default {
   components: {
     TimePicker,
