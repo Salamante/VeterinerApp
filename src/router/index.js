@@ -46,11 +46,6 @@ const router = new Router({
       name: 'Animals',
       meta: {requiresAuth: true},
       component: () => import('../views/Animals')
-    },
-    {
-      path: '/boilerplate',
-      name: 'BoilerPlate',
-      component: () => import('../components/BoilerPlate')
     }
   ]
 })
