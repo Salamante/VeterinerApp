@@ -19,7 +19,7 @@
                     ></v-select>
 
                   <h4 class="text-start mb-2">Tarih</h4>
-                  <calendar @input="updateDate"/>
+                  <date-picker @input="updateDate"/>
 
                   <h4 class="text-start mb-2">Saat</h4>
                   <time-picker @input="updateTime"/>
@@ -83,11 +83,11 @@
 import AppointmentService from '@/services/AppointmentService'
 import AnimalService from '@/services/AnimalService'
 import TimePicker from '../components/TimePicker.vue'
-import Calendar from '../components/Calendar.vue'
+import DatePicker from '../components/DatePicker.vue'
 export default {
   components: {
     TimePicker,
-    Calendar
+    DatePicker
   },
   data () {
     return {
