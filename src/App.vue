@@ -74,4 +74,7 @@ export default {
   margin: 0 !important;
   padding: 0 !important;
 }
+.v-data-table table thead tr th:hover {
+  color: blue !important
+}
 </style>

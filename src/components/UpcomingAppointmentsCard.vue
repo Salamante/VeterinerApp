@@ -12,18 +12,18 @@
                 class="ma-2"
                 color="green"
                 text-color="white"
-                ><v-icon class="mr-4">mdi-arrow-up-bold</v-icon>
-                12%
+                ><v-icon class="mr-4">mdi-file-chart</v-icon>
+                Son 1 Hafta
                 </v-chip>
         </div>
         <v-list-item-title class="text-h5 grey--text text-start mb-1">
-          Müşteriler
+          Yaklaşan Randevular
         </v-list-item-title>
-        <v-list-item-subtitle class="text-start black--text text-h4">{{customerLength}}</v-list-item-subtitle>
+        <v-list-item-subtitle class="text-start black--text text-h4">{{appointmentsLength}}</v-list-item-subtitle>
       </v-list-item-content>
 
       <v-list-item-icon
-      ><v-icon x-large color="green">mdi-account</v-icon></v-list-item-icon>
+      ><v-icon x-large color="green">mdi-calendar</v-icon></v-list-item-icon>
     </v-list-item>
 
     <v-card-actions>
@@ -34,8 +34,8 @@
 <script>
 export default {
   props: {
-    customerLength: {
-      default: 24
+    appointmentsLength: {
+      default: 15
     }
   }
 

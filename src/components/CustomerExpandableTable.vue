@@ -60,8 +60,5 @@ export default {
 </script>
 
 <style lang="sass">
-table
-    th
-        &:hover
-            color: blue !important
+
 </style>

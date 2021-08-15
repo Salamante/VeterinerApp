@@ -1,6 +1,7 @@
 <template>
   <div class="body">
     <v-container>
+      <appointments-card />
       <v-form>
           <div class="form-container mx-auto">
               <h1 class="text-color pt-4">Randevu Oluştur</h1>
@@ -84,10 +85,13 @@ import AppointmentService from '@/services/AppointmentService'
 import AnimalService from '@/services/AnimalService'
 import TimePicker from '../components/TimePicker.vue'
 import DatePicker from '../components/DatePicker.vue'
+import AppointmentsCard from '../components/AppointmentsCard.vue'
+
 export default {
   components: {
     TimePicker,
-    DatePicker
+    DatePicker,
+    AppointmentsCard
   },
   data () {
     return {
@@ -129,7 +133,7 @@ export default {
         response.forEach(element => {
           this.items.push(element)
         })
-        console.log(this.items)
+        // console.log(this.items)
       } catch (error) {
         console.log(error.response.data)
       }

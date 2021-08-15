@@ -19,6 +19,9 @@
         <v-col>
           <alert-card />
         </v-col>
+          <v-col>
+          <upcoming-appointments-card />
+        </v-col>
       </v-container>
       <v-toolbar
         dense
@@ -43,13 +46,15 @@ import AlertCard from '../components/AlertCard.vue'
 import CustomerCard from '../components/CustomerCard.vue'
 import CustomerExpandableTable from '../components/CustomerExpandableTable.vue'
 import FooterBar from '../components/Footer.vue'
+import UpcomingAppointmentsCard from '../components/UpcomingAppointmentsCard.vue'
 export default {
   name: 'Home',
   components: {
     CustomerExpandableTable,
     CustomerCard,
     AlertCard,
-    FooterBar
+    FooterBar,
+    UpcomingAppointmentsCard
   },
   data () {
     return {
