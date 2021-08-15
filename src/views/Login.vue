@@ -58,15 +58,6 @@
             {{alert.message}}
           </v-alert>
         </div>
-        <v-snackbar
-          v-if="snackbar.value"
-          v-model="snackbar.value"
-          :color="snackbar.color"
-          top
-          right
-        >
-          {{snackbar.message}}
-        </v-snackbar>
       </v-form>
       <div v-if="this.$store.state.isUserLoggedIn" class="ma-auto">
         <h3 class="white--text mt-16"><span class="black--text">{{this.$store.state.user.name.toUpperCase()}}</span> olarak giriş yaptınız.</h3>
@@ -93,11 +84,6 @@ export default {
       ],
       loader: null,
       loading4: false,
-      snackbar: {
-        value: false,
-        message: '',
-        color: ''
-      },
       response: null
     }
   },
@@ -116,19 +102,14 @@ export default {
     async login () {
       try {
         // AuthenticationService deki login methodunu cagiriyoruz burda.
-        this.response = await AuthenticationService.login(
-          this.user
-        )
+        this.response = await AuthenticationService.login(this.user)
         // Burada login olduktan sonra serverdan gelen payload u Vuex store(./store/store.js) icinde saklıyoruz.
         const token = this.response.data.access
         this.$store.dispatch('setToken', token)
         console.log('token: ' + this.$store.state.token)
+        this.$emit('popSnackbar', {color: 'green', message: 'Login başarılı!'})
         localStorage.setItem('accessToken', token)
         localStorage.setItem('refreshToken', this.response.data.refresh)
-        this.snackbar.message = 'Login işlemi başarılı!'
-        this.snackbar.color = 'green'
-        this.snackbar.value = true
-        setTimeout(() => { this.snackbar = false }, 2000)
         this.$router.push({name: 'Profile'})
         setTimeout(() => window.location.reload(), 2200)
 
@@ -140,6 +121,7 @@ export default {
         // Login olduktan sonra /profile e yonlendiriyor.
       } catch (err) {
         console.log(err.response.data.detail)
+        this.$emit('popSnackbar', {color: 'red', message: err.response.data.detail})
         this.alert.message = String(err.response.data.detail)
         this.alert.value = true
         setTimeout(() => { this.alert.value = false }, 10000)

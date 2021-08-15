@@ -331,12 +331,14 @@ export default {
     },
 
     async save () {
-      // try {
-      //   const response = await CustomerService.createCustomer(this.customer)
-      //   console.log(response)
-      // } catch (err) {
-      //   console.log(err.response.data)
-      // }
+      try {
+        const response = (await CustomerService.createCustomer(this.customer)).data
+        console.log(response)
+        this.$emit('popSnackbar', {color: 'green', message: 'Yeni müşteri eklendi!'})
+      } catch (err) {
+        console.log(err.response.data)
+        this.$emit('popSnackbar', {color: 'red', message: err.response.data})
+      }
       this.close()
     }
   }

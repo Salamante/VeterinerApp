@@ -194,9 +194,9 @@ export default {
           class: 'text-h5 black--text font-weight-bold'
         },
         { text: 'Randevu Tarihi', value: 'day', class: 'font-weight-bold text-h6' },
+        { text: 'Saati', value: 'time', class: 'font-weight-bold text-h6' },
+        { text: 'Tipi', value: 'kind', class: 'font-weight-bold text-h6' },
         { text: 'Ziyaret Amacı', value: 'description', class: 'font-weight-bold text-h6' },
-        { text: 'Tipi', value: 'time', class: 'font-weight-bold text-h6' },
-        { text: 'Ödeme', value: 'time', class: 'font-weight-bold text-h6' },
         { text: 'Actions', value: 'actions', sortable: false, class: 'font-weight-bold text-h6' }
       ],
       appointments: [],
@@ -259,6 +259,7 @@ export default {
           this.animalList.forEach(animal => {
             if (app.animal === animal.id) {
               app.animalName = animal.name
+              app.kind = animal.kind
             }
           })
         })

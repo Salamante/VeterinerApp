@@ -1,4 +1,5 @@
 <template>
+  <div class="body">
     <div id="main-container d-flex flex-row">
       <v-container>
         <not-logged-in-profile v-if="!this.$store.state.isUserLoggedIn"/>
@@ -21,6 +22,7 @@
         <v-snackbar v-if="snackbar.value" v-model="snackbar.value" color="red" top right>{{snackbar.message}}</v-snackbar>
       </v-container>
     </div>
+  </div>
 </template>
 
 <script>
@@ -70,9 +72,11 @@ export default {
       this.nameToChange = payload.emitedName
       this.emailToChange = payload.emitedEmail
       try {
-        await AuthenticationService.changeUserName(this.nameToChange)
+        const response = (await AuthenticationService.changeUserName(this.nameToChange)).data
+        this.$emit('popSnackbar', {color: 'green', message: response})
       } catch (err) {
-        console.log(err)
+        this.$emit('popSnackbar', {color: 'red', message: err.response.data.detail})
+        console.log(err.response.data.detail)
       }
     },
     async changePass (payload) {
@@ -98,6 +102,16 @@ export default {
 </script>
 
 <style scoped>
+.body {
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 1080px;
+  background: #2980B9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .v-col {
   max-width: 50%;
 }

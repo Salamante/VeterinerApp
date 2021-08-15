@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <v-app>
-        <main-bar @menuClicked="MenuSwitch" @logout="logout" v-if="this.$store.state.isUserLoggedIn"/>
+        <main-bar @logout="logout" v-if="this.$store.state.isUserLoggedIn"/>
         <top-bar v-if="this.$store.state.isUserLoggedIn"/>
-      <div :class="{'not-logged-in': !this.$store.state.isUserLoggedIn, 'menu-small': isMini, 'menu-large': !isMini}" class="body">
-        <router-view/>
+      <div :class="{'not-logged-in': !this.$store.state.isUserLoggedIn, 'menu-small': this.$store.state.MainBar.isMini, 'menu-large': !this.$store.state.MainBar.isMini}" class="body">
+        <router-view @popSnackbar="popup"/>
       </div>
+      <v-snackbar v-model="snackbar.value" v-if="snackbar.value" timeout="4000" :color="snackbar.color" top right>{{snackbar.message}}</v-snackbar>
     </v-app>
   </div>
 </template>
@@ -21,16 +22,23 @@ export default {
   },
   data () {
     return {
-      isMini: false
+      isMini: false,
+      snackbar: {
+        value: false,
+        message: '',
+        color: ''
+      }
     }
   },
   methods: {
-    MenuSwitch () {
-      this.isMini = !this.isMini
-    },
     logout () {
       sessionStorage.clear()
       console.log(this.$store.state.user)
+    },
+    popup (payload) {
+      this.snackbar.message = payload.message
+      this.snackbar.color = payload.color
+      this.snackbar.value = true
     }
   }
 }

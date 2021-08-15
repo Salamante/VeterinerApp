@@ -7,7 +7,7 @@
           class="mt-10"
         >
           <v-card-title class="title font-weight-black">
-              <v-icon large class="mr-5">mdi-email-edit</v-icon>
+              <v-icon large class="mr-5" color="primary">mdi-email-edit</v-icon>
               E-mail'i Değiştir
           </v-card-title>
           <v-divider class="mt-4 mb-6"></v-divider>

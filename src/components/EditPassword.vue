@@ -1,7 +1,7 @@
 <template>
   <v-card min-width="40%" height="500" elevation="2" outlined class="mx-auto mt-10">
     <v-card-title class="title font-weight-black">
-      <v-icon large class="mr-5">mdi-lock-question</v-icon>
+      <v-icon large class="mr-5" color="red">mdi-lock-question</v-icon>
       Parola Değiştir
     </v-card-title>
     <v-divider class="mt-4 mb-6"></v-divider>

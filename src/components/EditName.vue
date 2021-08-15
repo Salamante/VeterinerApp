@@ -7,7 +7,7 @@
           class="mt-10"
         >
           <v-card-title class="title font-weight-black">
-              <v-icon large class="mr-5">mdi-rename-box</v-icon>
+              <v-icon large class="mr-5" color="primary">mdi-rename-box</v-icon>
               İsmi Güncelle
           </v-card-title>
           <v-divider class="mt-4 mb-6"></v-divider>

@@ -1,11 +1,12 @@
 <template>
-  <div id="main-container" class="d-flex flex-row main-container">
+  <div class="body">
+   <div id="main-container" class="d-flex flex-row main-container">
     <div class="flex-grow-1">
       <v-toolbar
         prominent
         flat
         class="mt-10"
-        color="secondary"
+        color="#ad4b4b"
         dark
       >
         <v-toolbar-title class="align-self-center text-h3">
@@ -13,21 +14,15 @@
         </v-toolbar-title>
         </v-toolbar>
       <v-container class="d-flex flex-row" >
-        <v-col>
-          <customer-card />
-        </v-col>
-        <v-col>
-          <alert-card />
-        </v-col>
-          <v-col>
-          <upcoming-appointments-card />
-        </v-col>
+        <customer-card class="flex-grow-1"/>
+        <alert-card class="flex-grow-1"/>
+        <upcoming-appointments-card class="flex-grow-0"/>
       </v-container>
       <v-toolbar
         dense
         flat
         class="mt-10"
-        color="primary"
+        color="#ad4b4b"
         dark
       >
         <v-toolbar-title>
@@ -38,6 +33,7 @@
       <customer-expandable-table />
       <footer-bar />
     </div>
+   </div>
   </div>
 </template>
 
@@ -67,8 +63,17 @@ export default {
 </script>
 
 <style scoped>
+.body {
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 1080px;
+  background: #ee9ca7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffdde1, #ee9ca7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ffdde1, #ee9ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .main-container {
-  background: rgb(223, 223, 223);
   min-height: 1080px;
 }
 .dashboard-card {

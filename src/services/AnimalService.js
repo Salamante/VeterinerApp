@@ -11,7 +11,7 @@ export default {
   },
   createAnimal (animal) {
     const token = localStorage.getItem('accessToken')
-    return Api().post('/api/animals', animal, {
+    return Api().post('/api/animals/', animal, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

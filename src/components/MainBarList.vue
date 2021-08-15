@@ -31,7 +31,7 @@
             :to="{name: 'Animals'}"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-account-supervisor</v-icon>
+                <v-icon color="white">mdi-cat</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
