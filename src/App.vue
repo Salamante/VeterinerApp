@@ -68,7 +68,7 @@ export default {
   padding-right: 256px;
 }
 .body {
-  margin-top: 60px;
+  margin-top: 0;
 }
 .menu-small {
   margin-left:50px;

@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <div id="main-container d-flex flex-row">
+    <div class="main-container d-flex flex-row">
       <v-container>
         <not-logged-in-profile v-if="!this.$store.state.isUserLoggedIn"/>
         <profile-card :name="this.user ? this.user.name : 'Ziyaretçi'" v-if="this.$store.state.isUserLoggedIn"/>
@@ -106,11 +106,14 @@ export default {
   left: 0;
   top: 0;
   margin: 0;
-  padding: 0;
+  padding-top: 0;
   min-height: 1080px;
   background: #2980B9;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.main-container {
+  margin-top: 60px;
 }
 .v-col {
   max-width: 50%;

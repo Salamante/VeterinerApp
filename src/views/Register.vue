@@ -182,7 +182,7 @@ export default {
 }
 .form-container {
     width: 30%;
-    margin-top: 50px;
+    margin-top: 70px;
     background: white;
     border-radius: 15px;
 }

@@ -75,6 +75,7 @@ export default {
 }
 .main-container {
   min-height: 1080px;
+  margin-top: 60px;
 }
 .dashboard-card {
   width: 100%;
