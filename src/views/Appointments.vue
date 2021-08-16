@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <v-container>
-      <appointments-card />
+      <appointment-table />
       <v-form>
           <div class="form-container mx-auto">
               <h1 class="text-color pt-4">Randevu Oluştur</h1>
@@ -85,13 +85,13 @@ import AppointmentService from '@/services/AppointmentService'
 import AnimalService from '@/services/AnimalService'
 import TimePicker from '../components/TimePicker.vue'
 import DatePicker from '../components/DatePicker.vue'
-import AppointmentsCard from '../components/AppointmentsCard.vue'
+import AppointmentTable from '../components/AppointmentTable.vue'
 
 export default {
   components: {
     TimePicker,
     DatePicker,
-    AppointmentsCard
+    AppointmentTable
   },
   data () {
     return {
@@ -184,6 +184,7 @@ export default {
   margin: 0;
   padding: 0;
   min-height: 1080px;
+  height: 100vh;
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

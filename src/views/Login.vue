@@ -154,6 +154,7 @@ export default {
   margin: 0;
   padding: 0;
   min-height: 1080px;
+  height: 100vh;
   background: -webkit-linear-gradient(to right, #E4E5E6, #00416A);
   background: linear-gradient(to right, #E4E5E6, #00416A);
 }

@@ -2,7 +2,7 @@
 <div class="toolbar">
   <v-toolbar
     class="toolbar-position toolbar"
-    :class="{'small-menu': $store.state.MainBar.isMini}"
+    :class="{'small-menu': $store.state.MainBar.isMini, 'no-menu': $vuetify.breakpoint.mobile}"
     elevation="1"
     color="white"
     :width="$vuetify.breakpoint.width"
@@ -81,6 +81,10 @@ export default {
 .small-menu {
     margin-left: 56px !important;
     padding-right: 56px !important
+}
+.no-menu {
+  margin-left: 0px;
+  padding-right: 0px;
 }
 .search-field {
     max-width: 250px;

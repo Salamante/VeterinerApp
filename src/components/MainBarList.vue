@@ -40,6 +40,18 @@
             </v-list-item>
 
             <v-list-item
+            :to="{name: 'Products'}"
+            >
+            <v-list-item-icon>
+                <v-icon color="white">mdi-pharmacy</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+                <v-list-item-title class="white--text">Ürünler</v-list-item-title>
+            </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item
             :to="{name: 'Appointments'}"
             >
             <v-list-item-icon>

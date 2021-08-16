@@ -11,7 +11,7 @@ export default {
   },
   createProduct (product) {
     const token = localStorage.getItem('accessToken')
-    return Api().post('/api/products', product, {
+    return Api().post('/api/products/', product, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

@@ -46,6 +46,12 @@ const router = new Router({
       name: 'Animals',
       meta: {requiresAuth: true},
       component: () => import('../views/Animals')
+    },
+    {
+      path: '/products',
+      name: 'Products',
+      meta: {requiresAuth: true},
+      component: () => import('../views/Products')
     }
   ]
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="body">
-    <div class="main-container d-flex flex-row">
-      <v-container>
+    <div class="d-flex flex-row">
+      <v-container class="main-container">
         <not-logged-in-profile v-if="!this.$store.state.isUserLoggedIn"/>
         <profile-card :name="this.user ? this.user.name : 'Ziyaretçi'" v-if="this.$store.state.isUserLoggedIn"/>
         <v-col class="d-flex flex-column justify-start">

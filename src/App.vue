@@ -3,7 +3,7 @@
     <v-app>
         <main-bar @logout="logout" v-if="this.$store.state.isUserLoggedIn"/>
         <top-bar v-if="this.$store.state.isUserLoggedIn"/>
-      <div :class="{'not-logged-in': !this.$store.state.isUserLoggedIn, 'menu-small': this.$store.state.MainBar.isMini, 'menu-large': !this.$store.state.MainBar.isMini}" class="body">
+      <div :class="{'not-logged-in': !this.$store.state.isUserLoggedIn, 'menu-small': this.$store.state.MainBar.isMini, 'menu-large': !this.$store.state.MainBar.isMini, 'no-menu': $vuetify.breakpoint.mobile}" class="body">
         <router-view @popSnackbar="popup"/>
       </div>
       <v-snackbar v-model="snackbar.value" v-if="snackbar.value" timeout="4000" :color="snackbar.color" top right>{{snackbar.message}}</v-snackbar>
@@ -51,7 +51,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 0px;
+  margin-top: 0px !important;
 }
 .fixed-bar {
   position: fixed;
@@ -68,13 +68,16 @@ export default {
   padding-right: 256px;
 }
 .body {
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 .menu-small {
   margin-left:50px;
 }
 .menu-large {
   margin-left: 256px;
+}
+.no-menu {
+  margin-left: 0;
 }
 .not-logged-in {
   top: 0em !important;

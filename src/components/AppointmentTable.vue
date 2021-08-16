@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main-container">
         <v-toolbar
         dense
         flat
@@ -14,7 +14,6 @@
       </v-toolbar>
 
       <template>
-        <v-container>
             <v-data-table
                 :headers="headers"
                 :items="appointments"
@@ -170,7 +169,6 @@
                 </v-chip>
                 </template>
             </v-data-table>
-        </v-container>
       </template>
 
     </div>
@@ -326,5 +324,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.main-container
+  margin-top: 70px
 
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="body">
-   <div id="main-container" class="d-flex flex-row main-container">
-    <div class="flex-grow-1">
+   <div id="main-container" class="d-flex flex-row">
+    <div class="flex-grow-1 main-container">
       <v-toolbar
         prominent
         flat
@@ -69,6 +69,7 @@ export default {
   margin: 0;
   padding: 0;
   min-height: 1080px;
+  height: 100vh;
   background: #ee9ca7;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #ffdde1, #ee9ca7);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #ffdde1, #ee9ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

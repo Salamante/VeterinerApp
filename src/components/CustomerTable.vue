@@ -50,9 +50,9 @@
               <v-container>
                 <v-row>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.first_name"
@@ -60,9 +60,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.last_name"
@@ -70,9 +70,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.phone"
@@ -80,9 +80,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.email"
@@ -90,9 +90,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.tax_vkn_number"
@@ -100,9 +100,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.tax_office"
@@ -110,9 +110,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.district"
@@ -121,9 +121,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.city"
@@ -132,9 +132,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.address"
@@ -142,9 +142,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
+                    cols="36"
+                      sm="24"
+                      md="12"
                   >
                     <v-text-field
                       v-model="editedItem.description"
