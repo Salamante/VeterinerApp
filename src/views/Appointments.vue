@@ -3,7 +3,7 @@
     <v-container>
       <appointment-table />
       <v-form>
-          <div class="form-container mx-auto">
+          <div class="form-container mx-auto mb-15">
               <h1 class="text-color pt-4">Randevu Oluştur</h1>
               <v-col class="pr-8 pl-8"
                 >
@@ -34,15 +34,6 @@
                        v-model="description"
                     ></v-textarea>
               </v-col>
-              <div id="error">
-                <v-alert
-                  type="error"
-                  v-if="error"
-                  class="mr-10 mt-2"
-                  color="pink">
-                  {{error}}
-                </v-alert>
-              </div>
             <v-btn
               :loading="loading4"
               :disabled="loading4"
@@ -62,21 +53,9 @@
             color="green"
           ><v-icon class="mr-1">mdi-home</v-icon>Anasayfa</v-chip>
         </div>
-        <v-snackbar
-          class="ma-auto"
-          bottom
-          right
-          app
-          timeout="3000"
-          transition="scale-transition"
-          v-if="snackbar.value"
-          v-model="snackbar.value"
-          :color="snackbar.color"
-        >
-          {{snackbar.message}}
-        </v-snackbar>
       </v-form>
     </v-container>
+    <footer-bar />
   </div>
 </template>
 
@@ -86,12 +65,14 @@ import AnimalService from '@/services/AnimalService'
 import TimePicker from '../components/TimePicker.vue'
 import DatePicker from '../components/DatePicker.vue'
 import AppointmentTable from '../components/AppointmentTable.vue'
+import FooterBar from '../components/Footer.vue'
 
 export default {
   components: {
     TimePicker,
     DatePicker,
-    AppointmentTable
+    AppointmentTable,
+    FooterBar
   },
   data () {
     return {
@@ -100,17 +81,11 @@ export default {
       select: { },
       items: [],
       description: '',
-      error: null,
       rules: [
         value => !!value || 'Gerekli'
       ],
       loader: null,
-      loading4: false,
-      snackbar: {
-        value: false,
-        message: '',
-        color: ''
-      }
+      loading4: false
     }
   },
   computed: {
@@ -142,14 +117,10 @@ export default {
       try {
         const response = (await AppointmentService.createAppointment(this.appointment)).data
         console.log(response)
-        this.snackbar.message = 'Randevu oluşturuldu'
-        this.snackbar.color = 'green'
-        this.snackbar.value = true
+        this.$emit('popSnackbar', {color: 'green', message: 'Randevu oluşturuldu!'})
       } catch (err) {
+        this.$emit('popSnackbar', {color: 'red', message: err.response.data})
         console.log(err.response)
-        this.snackbar.message = err.response.data
-        this.snackbar.color = 'red'
-        this.snackbar.value = true
       }
     },
     updateDate (payload) {
@@ -175,15 +146,12 @@ export default {
 </script>
 
 <style scoped>
-.error {
-  color: red;
-}
 .body {
   left: 0;
   top: 0;
   margin: 0;
   padding: 0;
-  min-height: 1080px;
+  min-height: 160vh;
   height: 100vh;
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */

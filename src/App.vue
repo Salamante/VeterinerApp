@@ -53,6 +53,9 @@ export default {
   color: #2c3e50;
   margin-top: 0px !important;
 }
+.body {
+  margin-top: 0 !important;
+}
 .fixed-bar {
   position: fixed;
   top: 0em;
@@ -67,17 +70,17 @@ export default {
   margin-left: 256px;
   padding-right: 256px;
 }
-.body {
-  margin-top: 0 !important;
-}
 .menu-small {
   margin-left:50px;
+  top: 0em;
 }
 .menu-large {
   margin-left: 256px;
+  top: 0em;
 }
 .no-menu {
   margin-left: 0;
+  top: 0em;
 }
 .not-logged-in {
   top: 0em !important;

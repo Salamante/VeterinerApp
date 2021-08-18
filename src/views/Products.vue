@@ -1,6 +1,8 @@
 <template>
  <div class="body">
-     <product-table @popSnackbar="popSnackbar"/>
+     <v-container>
+        <product-table @popSnackbar="popSnackbar"/>
+     </v-container>
  </div>
 </template>
 
@@ -25,7 +27,7 @@ export default {
   top: 0;
   margin: 0;
   padding: 0;
-  min-height: 1080px;
+  min-height: 150vh;
   height: 100vh;
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */

@@ -54,9 +54,6 @@
             :to="{name: 'Register'}"
             class="create-acc-btn"><v-icon small>mdi-badge-account-outline</v-icon>Yeni hesap olustur
           </v-btn>
-          <v-alert v-if="alert.value" type="error" max-width="500px" class="mt-5 ma-auto white--text">
-            {{alert.message}}
-          </v-alert>
         </div>
       </v-form>
       <div v-if="this.$store.state.isUserLoggedIn" class="ma-auto">
@@ -74,10 +71,6 @@ export default {
     return {
       email: '',
       password: '',
-      alert: {
-        value: false,
-        message: ''
-      },
       isRegistered: false,
       rules: [
         value => !!value || 'Gerekli'
@@ -117,14 +110,9 @@ export default {
         const payload = (await AuthenticationService.getUserProfile()).data
         this.$store.dispatch('setUser', payload)
         localStorage.setItem('profile', JSON.stringify(payload))
-
-        // Login olduktan sonra /profile e yonlendiriyor.
       } catch (err) {
         console.log(err.response.data.detail)
         this.$emit('popSnackbar', {color: 'red', message: err.response.data.detail})
-        this.alert.message = String(err.response.data.detail)
-        this.alert.value = true
-        setTimeout(() => { this.alert.value = false }, 10000)
       }
     },
     alertPopUp () {

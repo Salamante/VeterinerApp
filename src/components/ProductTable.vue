@@ -1,5 +1,5 @@
 <template>
-  <v-container class="main-container">
+  <div class="main-container">
     <v-toolbar
         dense
         flat
@@ -11,7 +11,7 @@
           <v-icon large class="mr-4">mdi-pharmacy</v-icon>
           Ürünler
         </v-toolbar-title>
-      </v-toolbar>
+    </v-toolbar>
 
     <v-data-table
       :headers="headers"
@@ -77,23 +77,30 @@
                       sm="24"
                       md="12"
                     >
-                      <v-text-field
-                        suffix="mg"
-                        v-model="editedItem.unit"
-                        label="Birim(unit)"
-                        type="number"
-                      ></v-text-field>
+                    <v-select
+                      v-model="editedItem.unit"
+                      :items="units"
+                      item-text="name"
+                      item-value="id"
+                      label="Birim"
+                      persistent-hint
+                      single-line
+                    ></v-select>
                     </v-col>
                     <v-col
                       cols="36"
                       sm="24"
                       md="12"
                     >
-                      <v-text-field
+                      <v-select
                         v-model="editedItem.type"
-                        label="Tipi"
-                        type="number"
-                      ></v-text-field>
+                        :items="productTypes"
+                        item-text="name"
+                        item-value="id"
+                        label="Ürün Tipi"
+                        persistent-hint
+                        single-line
+                    ></v-select>
                     </v-col>
                     <v-col
                       cols="36"
@@ -191,11 +198,12 @@
         </v-icon>
       </template>
     </v-data-table>
-  </v-container>
+  </div>
 </template>
 
 <script>
 import ProductService from '@/services/ProductService'
+import CommonService from '@/services/CommonService'
 
 export default {
   data: () => ({
@@ -211,13 +219,17 @@ export default {
         class: 'black--text text-h5 font-weight-bold'
       },
       { text: 'Stok Durumu', value: 'stock', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Birim', value: 'unit', class: 'black--text text-h5 font-weight-bold' },
+      { text: 'Birim', value: 'unitName', class: 'black--text text-h5 font-weight-bold' },
       { text: 'Barkod', value: 'barcode', class: 'black--text text-h5 font-weight-bold' },
       { text: 'Satış Fiyatı($)', value: 'sales_price', class: 'black--text text-h5 font-weight-bold' },
       { text: 'Alış Fiyatı', value: 'purchase_price', class: 'black--text text-h5 font-weight-bold' },
       { text: 'Actions', value: 'actions', sortable: false, class: 'black--text text-h5 font-weight-bold' }
     ],
     products: [],
+    units: [],
+    productTypes: [],
+    selectUnit: null,
+    selectProductType: null,
     editedIndex: -1,
     editedItem: {
       name: '',
@@ -239,6 +251,7 @@ export default {
     }
   }),
   async mounted () {
+
   },
   computed: {
     product () {
@@ -265,15 +278,46 @@ export default {
   methods: {
     async initialize () {
       try {
-        const response = (await ProductService.getAllProducts()).data
-        response.forEach(product => {
-          this.products.push(product)
+        const productResponse = (await ProductService.getAllProducts()).data
+        const unitResponse = (await CommonService.getUnits()).data
+        this.productTypes = (await CommonService.getProductTypes()).data
+        productResponse.forEach(product => {
+          unitResponse.forEach(unit => {
+            this.units.push(unit)
+            if (product.unit === unit.id) {
+              product.unitName = unit.name
+              this.products.push(product)
+            }
+          })
         })
-        console.log(this.products)
       } catch (err) {
         console.log(err.response)
       }
+
+      // if (!this.$store.state.Units.units) {
+      //   const response = (await CommonService.getUnits()).data
+      //   response.forEach(element => {
+      //     this.units.push(element)
+      //   })
+      //   this.$store.dispatch('setUnits', response)
+      // }
+      // this.units = this.$store.state.Units.units
+      // console.log(this.$store.state.Units.units)
+
+      // for (let i = 0; i < this.units.length; i++) {
+      //   for (let j = 0; j < this.products.length; j++) {
+      //     if (this.units[i].id === this.products[j].unit) {
+      //       this.products[j].unitName = this.units[i].name
+      //     }
+      //   }
+      // }
+      // console.log(this.products)
     },
+    // replaceUnit () {
+    //   this.products.forEach(product => {
+    //     if (product.unit === this.$store.state.Units.units)
+    //   })
+    // }
 
     editItem (item) {
       this.editedIndex = this.products.indexOf(item)

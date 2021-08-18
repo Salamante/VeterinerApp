@@ -1,5 +1,4 @@
 <template>
-  <v-container>
     <v-data-table
       :headers="headers"
       :items="customers"
@@ -13,7 +12,6 @@
         <td :colspan="headers.length">More info about {{ item.first_name }}</td>
       </template>
     </v-data-table>
-  </v-container>
 </template>
 
 <script>

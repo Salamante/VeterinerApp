@@ -1,5 +1,5 @@
 <template>
-  <v-container class="main-container">
+  <div class="main-container">
     <v-toolbar
         dense
         flat
@@ -11,7 +11,7 @@
           <v-icon large class="mr-4">mdi-cat</v-icon>
           Hayvanlar
         </v-toolbar-title>
-      </v-toolbar>
+    </v-toolbar>
 
     <v-data-table
       :headers="headers"
@@ -63,9 +63,9 @@
                 <v-container>
                   <v-row>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
                       <v-text-field
                         v-model="editedItem.name"
@@ -73,9 +73,9 @@
                       ></v-text-field>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
                       <v-text-field
                         v-model="editedItem.passport"
@@ -83,9 +83,9 @@
                       ></v-text-field>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
                       <v-text-field
                         v-model="editedItem.birthday"
@@ -93,9 +93,9 @@
                       ></v-text-field>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
                       <v-text-field
                         v-model="editedItem.kind"
@@ -103,49 +103,69 @@
                       ></v-text-field>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
-                      <v-text-field
+                      <v-select
                         v-model="editedItem.spayed"
+                        :items="[{value: 'True', name: 'Evet'}, {value:'False', name: 'Hayır'}]"
+                        item-text="name"
+                        item-value="value"
                         label="Kısırlaştırma"
-                      ></v-text-field>
+                        persistent-hint
+                        single-line
+                    ></v-select>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
-                      <v-text-field
+                      <v-select
                         v-model="editedItem.specie"
+                        :items="species"
+                        item-text="name"
+                        item-value="id"
                         label="Tür"
-                      ></v-text-field>
+                        persistent-hint
+                        single-line
+                    ></v-select>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
-                      <v-text-field
+                      <v-select
                         v-model="editedItem.color"
+                        :items="colors"
+                        item-text="name"
+                        item-value="id"
                         label="Renk"
-                      ></v-text-field>
+                        persistent-hint
+                        single-line
+                    ></v-select>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
-                      <v-text-field
+                      <v-select
                         v-model="editedItem.gender"
+                        :items="[{name: 'erkek', value: 'male'}, {name: 'dişi', value: 'female'}]"
+                        item-text="name"
+                        item-value="value"
                         label="Cinsiyet"
-                      ></v-text-field>
+                        persistent-hint
+                        single-line
+                    ></v-select>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
+                      cols="36"
+                      sm="24"
+                      md="12"
                     >
                       <v-text-field
                         v-model="editedItem.owner"
@@ -205,11 +225,12 @@
         </v-icon>
       </template>
     </v-data-table>
-  </v-container>
+  </div>
 </template>
 
 <script>
 import AnimalService from '@/services/AnimalService'
+import CommonService from '@/services/CommonService'
 
 export default {
   data: () => ({
@@ -226,12 +247,14 @@ export default {
       },
       { text: 'Pasaport', value: 'passport', class: 'black--text text-h5 font-weight-bold' },
       { text: 'Tür', value: 'kind', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Cinsiyet', value: 'specie', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Renk', value: 'color', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Sahibi', value: 'owner', class: 'black--text text-h5 font-weight-bold' },
+      { text: 'Cinsiyet', value: 'gender', class: 'black--text text-h5 font-weight-bold' },
+      { text: 'Renk', value: 'colorName', class: 'black--text text-h5 font-weight-bold' },
+      { text: 'Cins', value: 'specieName', class: 'black--text text-h5 font-weight-bold' },
       { text: 'Actions', value: 'actions', sortable: false, class: 'black--text text-h5 font-weight-bold' }
     ],
     animals: [],
+    colors: [],
+    species: [],
     editedIndex: -1,
     editedItem: {
       id: '',
@@ -284,11 +307,20 @@ export default {
   methods: {
     async initialize () {
       try {
-        const response = (await AnimalService.getAllAnimals()).data
-        response.forEach(animal => {
-          this.animals.push(animal)
+        const animalResponse = (await AnimalService.getAllAnimals()).data
+        this.colors = (await CommonService.getColors()).data
+        this.species = (await CommonService.getSpecies()).data
+        animalResponse.forEach(animal => {
+          this.colors.forEach(color => {
+            // eslint-disable-next-line eqeqeq
+            if (color.id == animal.color) {
+              animal.colorName = color.name
+              this.animals.push(animal)
+            }
+          })
+          // eslint-disable-next-line eqeqeq
+          animal.specieName = (this.species.find(o => o.id == animal.specie)).name
         })
-        console.log(this.animals)
       } catch (err) {
         console.log(err.response)
       }
@@ -310,11 +342,13 @@ export default {
         const response = await AnimalService.deleteAnimal(this.editedIndex)
         console.log(response.data)
         this.closeDelete()
+        this.$emit('popSnackbar', {color: 'green', message: 'Hayvan silme başarılı!'})
         this.$nextTick(() => {
           window.location.reload()
         })
       } catch (err) {
         console.log(err.response)
+        this.$emit('popSnackbar', {color: 'red', message: err.response.data})
       }
     },
 
@@ -337,6 +371,7 @@ export default {
         this.$emit('popSnackbar', {color: 'green', message: 'Yeni hayvan eklendi!'})
       } catch (err) {
         console.log(err.response.data)
+        this.$emit('popSnackbar', {color: 'red', message: err.response.data})
       }
       this.close()
     }

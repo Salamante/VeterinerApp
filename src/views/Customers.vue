@@ -1,6 +1,6 @@
 <template>
 <div class="body">
-  <v-container class="main-container">
+  <v-container>
     <customer-table @popSnackbar="popSnackbar"/>
   </v-container>
 </div>
@@ -33,7 +33,8 @@ export default {
   top: 0;
   margin: 0;
   padding: 0;
-  min-height: 1080px;
+  height: 100vh;
+  min-height: 160vh;
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

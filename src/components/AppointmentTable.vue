@@ -11,10 +11,9 @@
           <v-icon large class="mr-4">mdi-calendar</v-icon>
           Randevular
         </v-toolbar-title>
-      </v-toolbar>
+        </v-toolbar>
 
-      <template>
-            <v-data-table
+        <v-data-table
                 :headers="headers"
                 :items="appointments"
                 sort-by="day"
@@ -168,8 +167,7 @@
                     Gözat
                 </v-chip>
                 </template>
-            </v-data-table>
-      </template>
+        </v-data-table>
 
     </div>
 </template>
@@ -235,7 +233,7 @@ export default {
   async mounted () {
   },
   computed: {
-    customer () {
+    appointment () {
       return this.editedItem
     },
     formTitle () {
@@ -252,14 +250,14 @@ export default {
           this.animalList.push(element)
         })
 
-        response.forEach(app => {
-          this.appointments.push(app)
+        response.forEach(appointment => {
           this.animalList.forEach(animal => {
-            if (app.animal === animal.id) {
-              app.animalName = animal.name
-              app.kind = animal.kind
+            if (appointment.animal === animal.id) {
+              appointment.animalName = animal.name
+              appointment.kind = animal.kind
             }
           })
+          this.appointments.push(appointment)
         })
       } catch (err) {
         console.log(err.response)
@@ -312,7 +310,8 @@ export default {
 
     async save () {
       // try {
-      //   const response = await CustomerService.createCustomer(this.customer)
+      //   const response = await AppointmentService.createAppointment(this.appointment)
+      //   this.$emit('popSnackbar', {color: 'green', message: 'Randevu Oluşturuldu'})
       //   console.log(response)
       // } catch (err) {
       //   console.log(err.response.data)
@@ -325,6 +324,5 @@ export default {
 
 <style lang="sass" scoped>
 .main-container
-  margin-top: 70px
-
+  margin-top: 60px
 </style>

@@ -44,6 +44,23 @@ const moduleToken = {
   }
 }
 
+const moduleUnits = {
+  namespaced: false,
+  state: () => ({
+    units: null
+  }),
+  mutations: {
+    setUnits (state, units) {
+      state.units = Object.assign({}, units)
+    }
+  },
+  actions: {
+    setUnits ({commit}, units) {
+      commit('setUnits', units)
+    }
+  }
+}
+
 const moduleSnackbar = {
   state: {
     value: false,
@@ -60,7 +77,8 @@ export default new Vuex.Store({
     MainBar: moduleMainBar,
     User: moduleUser,
     Token: moduleToken,
-    Snackbar: moduleSnackbar
+    Snackbar: moduleSnackbar,
+    Units: moduleUnits
   },
   state: {
     token: null,
