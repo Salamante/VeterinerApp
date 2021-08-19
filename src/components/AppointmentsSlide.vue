@@ -1,14 +1,14 @@
 <template>
   <v-card
     elevation="0"
-    max-width="600"
-    class="mx-auto mt-16 text-start"
+    max-width="800"
+    class="text-start"
   >
     <v-carousel
       :continuous="false"
       :cycle="cycle"
       :show-arrows="false"
-      height="300"
+      height="350"
     >
       <v-carousel-item
         v-for="(slide, i) in slides"
@@ -19,7 +19,6 @@
           max-width="inherit"
           height="300"
           outlined
-          color="#abf5e4"
         >
         <v-row>
           <v-col cols="8">

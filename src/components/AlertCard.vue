@@ -1,9 +1,11 @@
 <template>
   <v-card
-    class="mx-auto"
-    min-width="344"
+    min-width="320"
+    width="400"
+    height="165"
     outlined
     rounded="lg"
+    class="mx-auto"
   >
     <v-list-item three-line>
       <v-list-item-content>

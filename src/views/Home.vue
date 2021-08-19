@@ -13,10 +13,20 @@
           DASHBOARD
         </v-toolbar-title>
         </v-toolbar>
-      <v-container class="d-flex flex-row" >
-        <customer-card class="flex-grow-1"/>
-        <alert-card class="flex-grow-1"/>
-        <upcoming-appointments-card class="flex-grow-0"/>
+      <v-container>
+        <v-row>
+        <v-col cols="4" class="mt-3">
+          <v-row>
+            <customer-card />
+          </v-row>
+          <v-row class="mt-8">
+            <alert-card />
+          </v-row>
+        </v-col>
+        <v-col cols="8">
+          <appointments-slide />
+        </v-col>
+        </v-row>
       </v-container>
       <v-container>
         <v-toolbar
@@ -44,6 +54,7 @@
 <script>
 import AlertCard from '../components/AlertCard.vue'
 import AnimalTable from '../components/AnimalTable.vue'
+import AppointmentsSlide from '../components/AppointmentsSlide.vue'
 import CustomerCard from '../components/CustomerCard.vue'
 import CustomerExpandableTable from '../components/CustomerExpandableTable.vue'
 import FooterBar from '../components/Footer.vue'
@@ -58,7 +69,8 @@ export default {
     FooterBar,
     UpcomingAppointmentsCard,
     AnimalTable,
-    ProductTable
+    ProductTable,
+    AppointmentsSlide
   },
   data () {
     return {
