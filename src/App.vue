@@ -45,8 +45,9 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 #app {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Russo One', 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -90,5 +91,11 @@ export default {
 }
 .v-data-table table thead tr th:hover {
   color: blue !important
+}
+.v-data-table table thead th {
+  border: none !important
+}
+.v-data-table table tbody td {
+  border: none !important
 }
 </style>

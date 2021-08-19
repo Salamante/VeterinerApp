@@ -117,6 +117,9 @@ export default {
       try {
         const response = (await AppointmentService.createAppointment(this.appointment)).data
         console.log(response)
+        this.$nextTick(() => {
+          window.location.reload()
+        })
         this.$emit('popSnackbar', {color: 'green', message: 'Randevu oluşturuldu!'})
       } catch (err) {
         this.$emit('popSnackbar', {color: 'red', message: err.response.data})
@@ -153,10 +156,7 @@ export default {
   padding: 0;
   min-height: 160vh;
   height: 100vh;
-  background: #C6FFDD;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: #d7dadb;
 }
 .form-container {
     width: 40%;

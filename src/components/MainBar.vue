@@ -6,22 +6,22 @@
         <v-navigation-drawer
           permanent
           :mini-variant.sync="$store.state.MainBar.isMini"
-          color="#1a1e30"
+          color="#f2fbff"
           >
           <v-btn
               icon
               v-if="$store.state.MainBar.isMini"
               @click.stop="event(); mini = !mini; $store.state.MainBar.isMini = !$store.state.MainBar.isMini"
             >
-              <v-icon color="white">mdi-chevron-right</v-icon>
+              <v-icon color="secondary">mdi-chevron-right</v-icon>
             </v-btn>
             <v-list>
-        <v-list-item class="white--text">
+        <v-list-item class="secondary--text">
             <v-list-item-content>
             <v-list-item-title class="text-h6">
                 Veterinary
             </v-list-item-title>
-            <v-list-item-subtitle class="white--text">
+            <v-list-item-subtitle class="secondary--text">
                 Admin Panel
             </v-list-item-subtitle>
             </v-list-item-content>
@@ -29,7 +29,7 @@
               icon
               @click.stop="event(); mini = !mini; $store.state.MainBar.isMini = !$store.state.MainBar.isMini"
             >
-              <v-icon color="white">mdi-chevron-left</v-icon>
+              <v-icon color="secondary">mdi-chevron-left</v-icon>
             </v-btn>
         </v-list-item>
         </v-list>
@@ -74,6 +74,6 @@ export default {
 
 <style scoped>
 .divider {
-  background: white;
+  background: secondary;
 }
 </style>

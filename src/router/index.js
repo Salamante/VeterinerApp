@@ -52,6 +52,12 @@ const router = new Router({
       name: 'Products',
       meta: {requiresAuth: true},
       component: () => import('../views/Products')
+    },
+    {
+      path: '/boilerplate',
+      name: 'Boilerplate',
+      meta: {requiresAuth: true},
+      component: () => import('../components/Boilerplate')
     }
   ]
 })

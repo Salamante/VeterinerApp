@@ -232,13 +232,13 @@ export default {
         align: 'start',
         sortable: false,
         value: 'first_name',
-        class: 'black--text text-h5'
+        class: 'text-h7'
       },
-      { text: 'Email', value: 'email', class: 'black--text text-h5' },
-      { text: 'Telefon', value: 'phone', class: 'black--text text-h5' },
-      { text: 'Şehir', value: 'city.name', class: 'black--text text-h5' },
-      { text: 'District', value: 'district.name', class: 'black--text text-h5' },
-      { text: 'Actions', value: 'actions', sortable: false, class: 'black--text text-h5' }
+      { text: 'Email', value: 'email', class: 'text-h7' },
+      { text: 'Telefon', value: 'phone', class: 'text-h7' },
+      { text: 'Şehir', value: 'city.name', class: 'text-h7' },
+      { text: 'District', value: 'district.name', class: 'text-h7' },
+      { text: 'Actions', value: 'actions', sortable: false, class: 'text-h7' }
     ],
     customers: [],
     editedIndex: -1,
@@ -358,5 +358,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
+.main-container
+  font-family: 'Russo One'
 </style>

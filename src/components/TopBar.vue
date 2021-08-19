@@ -44,11 +44,13 @@
             </v-list>
         </v-menu>
         <v-divider vertical></v-divider>
-        <v-btn icon plain class="mr-3 ml-3 list-hover">
-            <v-icon>mdi-bell-ring</v-icon>
+        <v-btn icon class="mr-3 ml-3 list-hover">
+          <v-badge color="red" content="7">
+            <v-icon>mdi-bell</v-icon>
+          </v-badge>
         </v-btn>
         <v-divider vertical></v-divider>
-        <v-btn v-if="this.$store.state.isUserLoggedIn" icon plain class="list-hover ml-2">
+        <v-btn v-if="this.$store.state.isUserLoggedIn" icon class="list-hover ml-2">
         <v-icon >mdi-logout</v-icon>
       </v-btn>
   </v-toolbar>

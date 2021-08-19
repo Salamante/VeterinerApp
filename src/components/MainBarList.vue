@@ -1,17 +1,17 @@
 <template>
 <div>
     <v-list
-            class="text-start white--text"
+            class="text-start secondary--text"
         >
             <v-list-item
             :to="{name: 'Home'}"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-view-dashboard</v-icon>
+                <v-icon color="secondary">mdi-view-dashboard</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title class="white--text">Dashboard</v-list-item-title>
+                <v-list-item-title class="secondary--text">Dashboard</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -19,11 +19,11 @@
             :to="{name: 'Customers'}"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-account-supervisor</v-icon>
+                <v-icon color="secondary">mdi-account-supervisor</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title class="white--text">Müşteriler</v-list-item-title>
+                <v-list-item-title class="secondary--text">Müşteriler</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -31,11 +31,11 @@
             :to="{name: 'Animals'}"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-cat</v-icon>
+                <v-icon color="secondary">mdi-cat</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title class="white--text">Hayvanlar</v-list-item-title>
+                <v-list-item-title class="secondary--text">Hayvanlar</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -43,11 +43,11 @@
             :to="{name: 'Products'}"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-pharmacy</v-icon>
+                <v-icon color="secondary">mdi-pharmacy</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title class="white--text">Ürünler</v-list-item-title>
+                <v-list-item-title class="secondary--text">Ürünler</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -55,11 +55,11 @@
             :to="{name: 'Appointments'}"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-calendar-month</v-icon>
+                <v-icon color="secondary">mdi-calendar-month</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title class="white--text">Randevular</v-list-item-title>
+                <v-list-item-title class="secondary--text">Randevular</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -67,11 +67,11 @@
             :to="{name: 'Profile'}"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-account</v-icon>
+                <v-icon color="secondary">mdi-account</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title class="white--text">Profil</v-list-item-title>
+                <v-list-item-title class="secondary--text">Profil</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -83,11 +83,11 @@
             :to="{name: 'Login'}"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-login</v-icon>
+                <v-icon color="secondary">mdi-login</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title class="white--text">Giriş Yap</v-list-item-title>
+                <v-list-item-title class="secondary--text">Giriş Yap</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
 
@@ -97,11 +97,11 @@
             @click="logout"
             >
             <v-list-item-icon>
-                <v-icon color="white">mdi-login</v-icon>
+                <v-icon color="secondary">mdi-login</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title class="white--text">Çıkış Yap</v-list-item-title>
+                <v-list-item-title class="secondary--text">Çıkış Yap</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
         </v-list>
@@ -131,6 +131,6 @@ export default {
   font-family: Arial, Helvetica, sans-serif ;
 }
 .divider {
-  background: white;
+  background: secondary;
 }
 </style>

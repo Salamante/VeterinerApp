@@ -216,14 +216,14 @@ export default {
         align: 'start',
         sortable: false,
         value: 'name',
-        class: 'black--text text-h5 font-weight-bold'
+        class: 'text-h7 font-weight-bold'
       },
-      { text: 'Stok Durumu', value: 'stock', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Birim', value: 'unitName', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Barkod', value: 'barcode', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Satış Fiyatı($)', value: 'sales_price', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Alış Fiyatı', value: 'purchase_price', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Actions', value: 'actions', sortable: false, class: 'black--text text-h5 font-weight-bold' }
+      { text: 'Stok Durumu', value: 'stock', class: 'text-h7 font-weight-bold' },
+      { text: 'Birim', value: 'unitName', class: 'text-h7 font-weight-bold' },
+      { text: 'Barkod', value: 'barcode', class: 'text-h7 font-weight-bold' },
+      { text: 'Satış Fiyatı($)', value: 'sales_price', class: 'text-h7 font-weight-bold' },
+      { text: 'Alış Fiyatı', value: 'purchase_price', class: 'text-h7 font-weight-bold' },
+      { text: 'Actions', value: 'actions', sortable: false, class: 'text-h7 font-weight-bold' }
     ],
     products: [],
     units: [],
@@ -375,5 +375,6 @@ export default {
 <style scoped>
 .main-container {
   margin-top: 60px;
+  font-family: 'Russo One';
 }
 </style>

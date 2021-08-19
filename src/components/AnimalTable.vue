@@ -20,6 +20,18 @@
       class="elevation-1"
       :search="search"
     >
+    <template v-slot:[`item.gender`]="{ item }">
+      <v-chip
+        :color="getGenderColor(item.gender)"
+        v-text="getGenderName(item.gender)"
+      >
+      </v-chip>
+    </template>
+
+    <template v-slot:[`item.kind`]="{ item }">
+      <span><v-icon color="orange" class="mr-2">mdi-cat</v-icon>{{item.kind.toUpperCase()}}</span>
+    </template>
+
       <template v-slot:top>
         <v-toolbar
           flat
@@ -54,6 +66,7 @@
                 Hayvan Ekle
               </v-btn>
             </template>
+
             <v-card>
               <v-card-title>
                 <span class="text-h5">{{ formTitle }}</span>
@@ -243,14 +256,14 @@ export default {
         align: 'start',
         sortable: false,
         value: 'name',
-        class: 'black--text text-h5 font-weight-bold'
+        class: 'text-h7 font-weight-bold'
       },
-      { text: 'Pasaport', value: 'passport', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Tür', value: 'kind', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Cinsiyet', value: 'gender', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Renk', value: 'colorName', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Cins', value: 'specieName', class: 'black--text text-h5 font-weight-bold' },
-      { text: 'Actions', value: 'actions', sortable: false, class: 'black--text text-h5 font-weight-bold' }
+      { text: 'Pasaport', value: 'passport', class: 'text-h7 font-weight-bold' },
+      { text: 'Tür', value: 'kind', class: 'text-h7 font-weight-bold' },
+      { text: 'Cinsiyet', value: 'gender', class: 'text-h7 font-weight-bold' },
+      { text: 'Renk', value: 'colorName', class: 'text-h7 font-weight-bold' },
+      { text: 'Cins', value: 'specieName', class: 'text-h7 font-weight-bold' },
+      { text: 'Actions', value: 'actions', sortable: false, class: 'text-h7 font-weight-bold' }
     ],
     animals: [],
     colors: [],
@@ -374,6 +387,14 @@ export default {
         this.$emit('popSnackbar', {color: 'red', message: err.response.data})
       }
       this.close()
+    },
+    getGenderColor (gender) {
+      if (gender === 'female') return '#fa89a4'
+      if (gender === 'male') return '#91e0ff'
+    },
+    getGenderName (gender) {
+      if (gender === 'female') return 'Dişi'
+      if (gender === 'male') return 'Erkek'
     }
   }
 }
@@ -382,5 +403,6 @@ export default {
 <style scoped>
 .main-container {
   margin-top: 60px;
+  font-family: 'Russo One';
 }
 </style>

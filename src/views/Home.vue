@@ -78,9 +78,7 @@ export default {
   padding: 0;
   min-height: 150vh;
   height: 250vh;
-  background: #ee9ca7;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffdde1, #ee9ca7);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #ffdde1, #ee9ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #d7dadb;  /* fallback for old browsers */
 }
 .dashboard-card {
   width: 100%;
