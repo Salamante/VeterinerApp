@@ -45,10 +45,12 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
 #app {
-  font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Poiret One', cursive 'Russo One', 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Mitr', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -359,5 +359,5 @@ export default {
 
 <style lang="sass" scoped>
 .main-container
-  font-family: 'Russo One'
+  font-family: 'Mitr', sans-serif
 </style>

@@ -149,7 +149,7 @@ export default {
   background: #d7dadb;
 }
 h2, h4, h1, h6, h3 {
-  font-family: 'Poiret One', cursive;
+  font-family: 'Mitr', sans-serif;
   letter-spacing: 0.1em;
 }
 h4 span {

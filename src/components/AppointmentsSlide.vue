@@ -92,6 +92,6 @@ export default {
   height: 10px;
 }
 .title {
-  font-family: 'Poiret One', cursive !important;
+  font-family: 'Montserrat Alternates', sans-serif !important;
 }
 </style>

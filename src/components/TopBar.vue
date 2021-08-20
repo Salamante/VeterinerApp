@@ -49,7 +49,7 @@
             </v-list>
         </v-menu>
         <v-btn icon plain class="mr-3 list-hover">
-          <v-badge color="red" content="7" overlap>
+          <v-badge color="red" content="7" overlap dot>
             <v-icon small color="secondary">mdi-bell</v-icon>
           </v-badge>
         </v-btn>
@@ -97,7 +97,5 @@ export default {
 .profile-button {
     width: 160px;
     min-height: 60px;
-}
-.list-hover:hover {
 }
 </style>

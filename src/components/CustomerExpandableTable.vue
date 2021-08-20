@@ -73,5 +73,5 @@ export default {
 
 <style lang="sass" scoped>
 .table-text
-  font-family: 'Russo One'
+  font-family: 'Mitr', sans-serif
 </style>

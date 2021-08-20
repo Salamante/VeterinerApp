@@ -403,6 +403,6 @@ export default {
 <style scoped>
 .main-container {
   margin-top: 60px;
-  font-family: 'Russo One';
+  font-family: 'Mitr', sans-serif;
 }
 </style>
