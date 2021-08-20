@@ -1,4 +1,17 @@
 <template>
+<div class="table-text">
+    <v-toolbar
+      dense
+      flat
+      class="mt-10 mb-10"
+      color="#00355e"
+      dark
+    >
+      <v-toolbar-title>
+        <v-icon large class="mr-4">mdi-account-multiple</v-icon>
+        Müşteriler
+      </v-toolbar-title>
+    </v-toolbar>
     <v-data-table
       :headers="headers"
       :items="customers"
@@ -6,12 +19,13 @@
       :expanded.sync="expanded"
       item-key="first_name"
       show-expand
-      class="elevation-1 data-table-text"
+      class="elevation-1"
     >
       <template v-slot:expanded-item="{ headers, item }">
         <td :colspan="headers.length">More info about {{ item.first_name }}</td>
       </template>
     </v-data-table>
+</div>
 </template>
 
 <script>
@@ -58,6 +72,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.data-table-text
+.table-text
   font-family: 'Russo One'
 </style>

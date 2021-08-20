@@ -3,7 +3,7 @@
     <v-toolbar
           dense
           flat
-          color="#4a915d"
+          color="#00355e"
           dark
           class="mb-10"
         >

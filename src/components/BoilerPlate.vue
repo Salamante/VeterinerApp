@@ -1,93 +1,39 @@
 <template>
-  <v-card
-    elevation="0"
-    max-width="600"
-    class="mx-auto mt-16 text-start"
-  >
-    <v-carousel
-      :continuous="false"
-      :cycle="cycle"
-      :show-arrows="false"
-      height="300"
-    >
-      <v-carousel-item
-        v-for="(slide, i) in slides"
-        :key="i"
-      >
-        <v-card
-          class="mx-auto"
-          max-width="inherit"
-          height="300"
-          outlined
-          color="#abf5e4"
-        >
-        <v-row>
-          <v-col cols="8">
-            <v-card-title class="text-h4">
-              19 Ağustos SALI
-            </v-card-title>
-            <v-card-subtitle>
-              <v-chip small color="orange">
-              16:30
-              </v-chip>
-            </v-card-subtitle>
-            <v-card-text class="font-weight-bold mt-7">
-              Gofret - British Shorthair
-            </v-card-text>
-            <v-card-text class="card-text">
-              Genel Kontrol
-            </v-card-text>
-            <v-card-text class="font-italic card-text">
-              Ahmet ORMAN
-            </v-card-text>
-          </v-col>
-
-          <v-col cols="4">
-              <v-list-item-avatar
-                size="150"
-                color="grey"
-              >
-              <v-img
-              :src="pisiUrl"
-              >
-              </v-img>
-              </v-list-item-avatar>
-          </v-col>
-        </v-row>
-        </v-card>
-      </v-carousel-item>
-    </v-carousel>
-  </v-card>
+  <div class="small mx-auto mt-16">
+    <bar :data="dataCollection" />
+  </div>
 </template>
 
 <script>
-import Pisi from '@/assets/pisi.jpg'
+import Bar from './InfoChart.js'
+
 export default {
+  components: {
+    Bar
+  },
   data () {
     return {
-      pisiUrl: Pisi,
-      colors: [
-        'green',
-        'secondary',
-        'yellow darken-4',
-        'red lighten-2',
-        'orange darken-1'
-      ],
-      cycle: true,
-      slides: [
-        'First',
-        'Second',
-        'Third',
-        'Fourth',
-        'Fifth'
-      ]
+      dataCollection: {
+        labels: ['What', 'DaFcuk'],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [23, 43]
+          }, {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [22, 13]
+          }
+        ]
+      }
     }
   }
 }
 </script>
 
-<style scoped>
-.card-text {
-  height: 10px;
-}
+<style>
+  .small {
+    width: 250px;
+  }
 </style>

@@ -3,7 +3,8 @@
   <v-toolbar
     class="toolbar-position toolbar"
     :class="{'small-menu': $store.state.MainBar.isMini, 'no-menu': $vuetify.breakpoint.mobile}"
-    elevation="1"
+    elevation="0"
+    dense
     color="white"
     :width="$vuetify.breakpoint.width"
     >
@@ -12,14 +13,18 @@
             hide-details
             prepend-icon="mdi-magnify"
             single-line
+            rounded
+            filled
+            dense
+            label="arama"
             class="search-field"
         ></v-text-field>
 
         <v-spacer></v-spacer>
         <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
-                <v-btn text plain class="mr-3 profile-button" v-bind="attrs" v-on="on">
-                    <v-avatar class="mr-5" size="20" round>
+                <v-btn text plain class="mr-3 profile-button font-weight-bold" v-bind="attrs" v-on="on">
+                    <v-avatar class="mr-5" size="30" round>
                         <v-img
                         src="https://www.vscnl.ca/wp-content/uploads/2020/06/Dr-Laura-Rogers-Avatar-FAA.png"
                         ></v-img>
@@ -43,15 +48,13 @@
                 </v-list-item>
             </v-list>
         </v-menu>
-        <v-divider vertical></v-divider>
-        <v-btn icon class="mr-3 ml-3 list-hover">
-          <v-badge color="red" content="7">
-            <v-icon>mdi-bell</v-icon>
+        <v-btn icon plain class="mr-3 list-hover">
+          <v-badge color="red" content="7" overlap>
+            <v-icon small color="secondary">mdi-bell</v-icon>
           </v-badge>
         </v-btn>
-        <v-divider vertical></v-divider>
-        <v-btn v-if="this.$store.state.isUserLoggedIn" icon class="list-hover ml-2">
-        <v-icon >mdi-logout</v-icon>
+        <v-btn v-if="this.$store.state.isUserLoggedIn" icon plain class="list-hover">
+        <v-icon small color="secondary">mdi-logout</v-icon>
       </v-btn>
   </v-toolbar>
   </div>
@@ -96,6 +99,5 @@ export default {
     min-height: 60px;
 }
 .list-hover:hover {
-  color: blue !important;
 }
 </style>

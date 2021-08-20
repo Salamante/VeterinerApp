@@ -2,13 +2,15 @@
   <v-card
     elevation="0"
     max-width="800"
-    class="text-start"
+    height="337"
+    class="text-start title"
   >
     <v-carousel
-      :continuous="false"
+      :continuous="true"
       :cycle="cycle"
-      :show-arrows="false"
-      height="350"
+      :show-arrows-on-hover="true"
+      hide-delimiter-background
+      height="inherit"
     >
       <v-carousel-item
         v-for="(slide, i) in slides"
@@ -17,12 +19,12 @@
         <v-card
           class="mx-auto"
           max-width="inherit"
-          height="300"
-          outlined
+          height="347"
+          elevation="0"
         >
         <v-row>
           <v-col cols="8">
-            <v-card-title class="text-h4">
+            <v-card-title class="text-h4 title">
               19 Ağustos SALI
             </v-card-title>
             <v-card-subtitle>
@@ -88,5 +90,8 @@ export default {
 <style scoped>
 .card-text {
   height: 10px;
+}
+.title {
+  font-family: 'Poiret One', cursive !important;
 }
 </style>

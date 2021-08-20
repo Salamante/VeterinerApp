@@ -2,6 +2,7 @@
 <div v-if="!this.$vuetify.breakpoint.mobile" class="fixed-bar">
     <v-card
         :height="$vuetify.breakpoint.height"
+        elevation="4"
     >
         <v-navigation-drawer
           permanent
