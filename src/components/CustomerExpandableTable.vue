@@ -62,7 +62,6 @@ export default {
         response.forEach(element => {
           this.customers.push(element)
         })
-        console.log(this.customers)
       } catch (err) {
         console.log(err.response)
       }

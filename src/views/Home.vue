@@ -98,6 +98,7 @@ import ProductTable from '../components/ProductTable.vue'
 import UpcomingAppointmentsCard from '../components/UpcomingAppointmentsCard.vue'
 import InfoChart from '../components/InfoChart.js'
 import SalesSheet from '../components/SalesSheet.vue'
+import AnimalService from '@/services/AnimalService'
 export default {
   name: 'Home',
   components: {
@@ -131,6 +132,10 @@ export default {
         ]
       }
     }
+  },
+  async mounted () {
+    const response = (await AnimalService.getAllAnimals()).data
+    this.$store.dispatch('setAnimals', response)
   },
   methods: {
   }

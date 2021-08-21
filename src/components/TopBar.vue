@@ -54,7 +54,7 @@
           </v-badge>
         </v-btn>
         <v-btn v-if="this.$store.state.isUserLoggedIn" icon plain class="list-hover">
-        <v-icon small color="secondary">mdi-logout</v-icon>
+        <v-icon small color="secondary">mdi-logout-variant</v-icon>
       </v-btn>
   </v-toolbar>
   </div>

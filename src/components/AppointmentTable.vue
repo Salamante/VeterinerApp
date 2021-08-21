@@ -17,7 +17,7 @@
                 :headers="headers"
                 :items="appointments"
                 sort-by="day"
-                class="elevation-1"
+                class="elevation-1 font"
             >
                 <template v-slot:top>
                 <v-toolbar
@@ -186,14 +186,13 @@ export default {
           text: 'Hasta',
           align: 'start',
           sortable: false,
-          value: 'animalName',
-          class: 'text-h5 black--text font-weight-bold'
+          value: 'animalName'
         },
-        { text: 'Randevu Tarihi', value: 'day', class: 'font-weight-bold text-h6' },
-        { text: 'Saati', value: 'time', class: 'font-weight-bold text-h6' },
-        { text: 'Tipi', value: 'kind', class: 'font-weight-bold text-h6' },
-        { text: 'Ziyaret Amacı', value: 'description', class: 'font-weight-bold text-h6' },
-        { text: 'Actions', value: 'actions', sortable: false, class: 'font-weight-bold text-h6' }
+        { text: 'Randevu Tarihi', value: 'day' },
+        { text: 'Saati', value: 'time' },
+        { text: 'Tipi', value: 'kind' },
+        { text: 'Ziyaret Amacı', value: 'description' },
+        { text: 'Actions', value: 'actions', sortable: false }
       ],
       appointments: [],
       animalList: [],
@@ -325,4 +324,7 @@ export default {
 <style lang="sass" scoped>
 .main-container
   margin-top: 60px
+  font-family: 'Mitr', sans-serif
+.font
+   font-family: 'Mitr', sans-serif
 </style>

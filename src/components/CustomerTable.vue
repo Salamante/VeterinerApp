@@ -344,8 +344,8 @@ export default {
 
     async save () {
       try {
+        // eslint-disable-next-line no-unused-vars
         const response = (await CustomerService.createCustomer(this.customer)).data
-        console.log(response)
         this.$emit('popSnackbar', {color: 'green', message: 'Yeni müşteri eklendi!'})
       } catch (err) {
         console.log(err.response.data)

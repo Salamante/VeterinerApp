@@ -61,6 +61,23 @@ const moduleUnits = {
   }
 }
 
+const moduleAnimals = {
+  namespaced: false,
+  state: () => ({
+    animals: []
+  }),
+  mutations: {
+    setAnimals (state, animals) {
+      state.animals = animals
+    }
+  },
+  actions: {
+    setAnimals ({commit}, animals) {
+      commit('setAnimals', animals)
+    }
+  }
+}
+
 const moduleSnackbar = {
   state: {
     value: false,
@@ -78,7 +95,8 @@ export default new Vuex.Store({
     User: moduleUser,
     Token: moduleToken,
     Snackbar: moduleSnackbar,
-    Units: moduleUnits
+    Units: moduleUnits,
+    Animals: moduleAnimals
   },
   state: {
     token: null,
