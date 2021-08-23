@@ -36,7 +36,7 @@ const router = new Router({
       component: () => import('../views/Profile')
     },
     {
-      path: '/customers',
+      path: '/customers/',
       name: 'Customers',
       meta: {requiresAuth: true},
       component: () => import('../views/Customers')

@@ -44,6 +44,24 @@ const moduleToken = {
   }
 }
 
+const moduleAppointments = {
+  namespaced: false,
+  state: () => ({
+    appointments: [],
+    appointmentsClose: []
+  }),
+  mutations: {
+    setAppointment (state, appointment) {
+      state.appointmentsClose.push(appointment)
+    }
+  },
+  actions: {
+    setAppointment ({commit}, appointment) {
+      commit('setAppointment', appointment)
+    }
+  }
+}
+
 const moduleUnits = {
   namespaced: false,
   state: () => ({
@@ -67,13 +85,29 @@ const moduleAnimals = {
     animals: []
   }),
   mutations: {
-    setAnimals (state, animals) {
-      state.animals = animals
+    setAnimals (state, animal) {
+      state.animals.push(animal)
     }
   },
   actions: {
-    setAnimals ({commit}, animals) {
-      commit('setAnimals', animals)
+    setAnimals ({commit}, animal) {
+      commit('setAnimals', animal)
+    }
+  }
+}
+
+const moduleCustomers = {
+  state: () => ({
+    customers: []
+  }),
+  mutations: {
+    setCustomers (state, customer) {
+      state.animals.push(customer)
+    }
+  },
+  actions: {
+    setCustomers ({commit}, customer) {
+      commit('setAnimals', customer)
     }
   }
 }
@@ -96,7 +130,9 @@ export default new Vuex.Store({
     Token: moduleToken,
     Snackbar: moduleSnackbar,
     Units: moduleUnits,
-    Animals: moduleAnimals
+    Animals: moduleAnimals,
+    Appointments: moduleAppointments,
+    Customers: moduleCustomers
   },
   state: {
     token: null,

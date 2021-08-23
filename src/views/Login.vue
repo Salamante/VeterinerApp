@@ -57,7 +57,7 @@
         </div>
       </v-form>
       <div v-if="this.$store.state.isUserLoggedIn" class="ma-auto">
-        <h3 class="white--text mt-16"><span class="black--text">{{this.$store.state.user.name.toUpperCase()}}</span> olarak giriş yaptınız.</h3>
+        <h3 class="Secondary--text mt-16">Zaten giriş yaptınız.</h3>
         <v-btn text plain :to="{name: 'Home'}">Anasayfa</v-btn>
       </div>
     </v-container>
@@ -66,6 +66,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import PrefetchService from '@/services/PrefetchService'
 export default {
   data () {
     return {
@@ -103,8 +104,15 @@ export default {
         this.$emit('popSnackbar', {color: 'green', message: 'Login başarılı!'})
         localStorage.setItem('accessToken', token)
         localStorage.setItem('refreshToken', this.response.data.refresh)
-        this.$router.push({name: 'Profile'})
-        setTimeout(() => window.location.reload(), 2200)
+        await PrefetchService.initialize()
+        console.log('prefetch.initialize initialized')
+        console.log(this.$store.state.Animals.animals)
+        await PrefetchService.appointmentClose()
+        console.log('prefetch.appointmentClose initialized')
+        console.log(this.$store.state.Appointments.appointmentsClose)
+        console.log(this.$store.state.Appointments.appointments)
+
+        this.$router.push({name: 'Home'})
 
         // Burada profile ait datayı serverdan cekip yine store icinde saklıyoruz.
         const payload = (await AuthenticationService.getUserProfile()).data

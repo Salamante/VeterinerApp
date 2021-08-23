@@ -69,6 +69,7 @@
                       <v-text-field
                         v-model="editedItem.first_name"
                         label="İsim"
+                        :rules="rules"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -79,6 +80,7 @@
                       <v-text-field
                         v-model="editedItem.last_name"
                         label="Soyisim"
+                        :rules="rules"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -89,6 +91,7 @@
                       <v-text-field
                         v-model="editedItem.phone"
                         label="Telefon"
+                        :rules="rules"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -98,7 +101,9 @@
                     >
                       <v-text-field
                         v-model="editedItem.email"
+                        type="email"
                         label="email"
+                        :rules="rules"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -109,6 +114,7 @@
                       <v-text-field
                         v-model="editedItem.tax_vkn_number"
                         label="Tax VKN Numarası"
+                        :rules="rules"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -119,29 +125,47 @@
                       <v-text-field
                         v-model="editedItem.tax_office"
                         label="Vergi Dairesi"
+                        :rules="rules"
                       ></v-text-field>
                     </v-col>
-                    <v-col
+                      <v-col
                       cols="36"
                         sm="24"
                         md="12"
                     >
-                      <v-text-field
-                        v-model="editedItem.district"
-                        type="number"
-                        label="district"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col
-                      cols="36"
-                        sm="24"
-                        md="12"
-                    >
-                      <v-text-field
+                      <v-select
+                        v-model="editedItem.city"
+                        @input="fetchDistricts($event)"
+                        :items="cities"
+                        item-text="name"
+                        item-value="id"
+                        label="Şehir"
+                        persistent-hint
+                        single-line
+                        :rules="rules"
+                    ></v-select>
+                      <!-- <v-text-field
                         v-model="editedItem.city"
                         type="number"
                         label="şehir"
-                      ></v-text-field>
+                      ></v-text-field> -->
+                    </v-col>
+
+                    <v-col
+                      cols="36"
+                        sm="24"
+                        md="12"
+                    >
+                      <v-select
+                        v-model="editedItem.district"
+                        :items="districts"
+                        item-text="name"
+                        item-value="id"
+                        label="Semt"
+                        persistent-hint
+                        single-line
+                        :rules="rules"
+                    ></v-select>
                     </v-col>
                     <v-col
                       cols="36"
@@ -151,6 +175,7 @@
                       <v-text-field
                         v-model="editedItem.address"
                         label="Adres"
+                        :rules="rules"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -161,6 +186,7 @@
                       <v-text-field
                         v-model="editedItem.description"
                         label="Açıklama"
+                        :rules="rules"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -179,7 +205,7 @@
                 <v-btn
                   color="blue darken-1"
                   text
-                  @click="save"
+                  @click="isNew? save() : patch()"
                 >
                   Kaydet
                 </v-btn>
@@ -188,7 +214,7 @@
           </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
-              <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
+              <v-card-title class="text-h5">Silmek istediğinize emin misiniz?</v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
@@ -203,7 +229,7 @@
         <v-icon
           small
           class="mr-2"
-          @click="editItem(item)"
+          @click="editItem(item); isEdit= 'true'"
         >
           mdi-pencil
         </v-icon>
@@ -220,27 +246,34 @@
 
 <script>
 import CustomerService from '@/services/CustomerService'
+import CommonService from '@/services/CommonService'
 
 export default {
   data: () => ({
     search: '',
     dialog: false,
     dialogDelete: false,
+    isEdit: false,
+    rules: [
+      value => !!value || 'Gerekli'
+    ],
     headers: [
       {
-        text: 'Müşteri',
+        text: 'id',
         align: 'start',
         sortable: false,
-        value: 'first_name',
-        class: 'text-h7'
+        value: 'id'
       },
-      { text: 'Email', value: 'email', class: 'text-h7' },
-      { text: 'Telefon', value: 'phone', class: 'text-h7' },
-      { text: 'Şehir', value: 'city.name', class: 'text-h7' },
-      { text: 'District', value: 'district.name', class: 'text-h7' },
-      { text: 'Actions', value: 'actions', sortable: false, class: 'text-h7' }
+      { text: 'İsim', value: 'first_name' },
+      { text: 'Email', value: 'email' },
+      { text: 'Telefon', value: 'phone' },
+      { text: 'Şehir', value: 'city.name' },
+      { text: 'District', value: 'district.name' },
+      { text: 'Actions', value: 'actions', sortable: false }
     ],
     customers: [],
+    cities: [],
+    districts: [],
     editedIndex: -1,
     editedItem: {
       first_name: '',
@@ -268,8 +301,7 @@ export default {
     }
   }),
   async mounted () {
-    const res = await CustomerService.getCustomer(5)
-    console.log(res.data)
+    this.initialize()
   },
   computed: {
     customer () {
@@ -281,6 +313,9 @@ export default {
   },
 
   watch: {
+    isEdit (val) {
+      console.log(val)
+    },
     dialog (val) {
       val || this.close()
     },
@@ -290,7 +325,6 @@ export default {
   },
 
   created () {
-    this.initialize()
   },
 
   methods: {
@@ -300,14 +334,23 @@ export default {
         response.forEach(element => {
           this.customers.push(element)
         })
-        console.log(this.customers)
+        this.cities = (await CommonService.getCities()).data
       } catch (err) {
         console.log(err.response)
       }
     },
+    async fetchDistricts (cityId) {
+      this.districts = []
+      const response = (await CommonService.getDistricts()).data
+      response.forEach(district => {
+        if (district.city.id === cityId) {
+          this.districts.push(district)
+        }
+      })
+    },
 
     editItem (item) {
-      this.editedIndex = this.customers.indexOf(item)
+      this.editedIndex = item.id
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
@@ -319,8 +362,7 @@ export default {
 
     async deleteItemConfirm () {
       try {
-        const response = await CustomerService.deleteCustomer(this.editedIndex)
-        console.log(response.data)
+        await CustomerService.deleteCustomer(this.editedIndex)
         this.closeDelete()
         this.$nextTick(() => {
           window.location.reload()
@@ -332,6 +374,7 @@ export default {
 
     close () {
       this.dialog = false
+      this.isEdit = false
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
@@ -346,7 +389,20 @@ export default {
       try {
         // eslint-disable-next-line no-unused-vars
         const response = (await CustomerService.createCustomer(this.customer)).data
+        window.location.reload()
         this.$emit('popSnackbar', {color: 'green', message: 'Yeni müşteri eklendi!'})
+      } catch (err) {
+        console.log(err.response.data)
+        this.$emit('popSnackbar', {color: 'red', message: err.response.data})
+      }
+      this.close()
+    },
+    async patch () {
+      try {
+        // eslint-disable-next-line no-unused-vars
+        const response = (await CustomerService.patchCustomer(this.customer.id, this.customer)).data
+        window.location.reload()
+        this.$emit('popSnackbar', {color: 'green', message: 'Müşteri Editlendi'})
       } catch (err) {
         console.log(err.response.data)
         this.$emit('popSnackbar', {color: 'red', message: err.response.data})

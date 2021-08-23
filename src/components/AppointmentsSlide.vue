@@ -70,90 +70,24 @@
 <script>
 import Pisi from '@/assets/pisi.jpg'
 import Pisi2 from '@/assets/pisi2.jpg'
-import AppointmentService from '@/services/AppointmentService'
+import Pisi3 from '@/assets/pisi3.jpg'
+// import AppointmentService from '@/services/AppointmentService'
 export default {
   data () {
     return {
       appointmentsAll: [],
       appointmentsClose: [],
-      pisiUrl: [Pisi, Pisi2],
+      pisiUrl: [Pisi, Pisi2, Pisi3],
       cycle: true
     }
   },
-  async mounted () {
-    try {
-      this.appointmentsAll = (await AppointmentService.getAllAppointments()).data
-      let today = new Date()
-      this.appointmentsAll.forEach(appointment => {
-        appointment.time = this.modifyTimeText(appointment.time)
-        const formattedDay = new Date(appointment.day)
-        let remainingDays = Math.floor((formattedDay - today) / (1000 * 60 * 60 * 24))
-        if (remainingDays > 0 && remainingDays < 5) {
-          appointment.dayText = this.modifyDayText(appointment.day)
-          appointment.animalName = this.getAnimalName(appointment.animal)
-          this.appointmentsClose.push(appointment)
-        }
-      })
-    } catch (err) {
-      console.log(err.response)
-    }
+  mounted () {
+    this.initialize()
   },
   methods: {
-    modifyTimeText (time) {
-      const regex = /\d+.\d+/
-      return time.match(regex)[0]
-    },
-    modifyDayText (day) {
-      const arr = day.split('-').splice(1, 2)
-      const dayNum = arr[1]
-      let dayText = ''
-      switch (arr[0]) {
-        case '01':
-          dayText = 'Ocak'
-          break
-        case '02':
-          dayText = 'Şubat'
-          break
-        case '03':
-          dayText = 'Mart'
-          break
-        case '04':
-          dayText = 'Nisan'
-          break
-        case '05':
-          dayText = 'Mayıs'
-          break
-        case '06':
-          dayText = 'Haziran'
-          break
-        case '07':
-          dayText = 'Temmuz'
-          break
-        case '08':
-          dayText = 'Ağustos'
-          break
-        case '09':
-          dayText = 'Eylül'
-          break
-        case '10':
-          dayText = 'Ekim'
-          break
-        case '11':
-          dayText = 'Kasım'
-          break
-        case '12':
-          dayText = 'Aralık'
-          break
-        default:
-          dayText = 'Object Object'
-          break
-      }
-      return `${dayNum} ${dayText}`
-    },
-    getAnimalName (id) {
-      const animals = this.$store.state.Animals.animals
-      // eslint-disable-next-line eqeqeq
-      return (animals.find(o => o.id == id)).name
+    async initialize () {
+      this.appointmentsClose = await this.$store.state.Appointments.appointmentsClose
+      this.appointmentsAll = await this.$store.state.Appointments.appointments
     }
   }
 }

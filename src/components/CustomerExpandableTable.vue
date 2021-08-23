@@ -22,7 +22,18 @@
       class="elevation-1"
     >
       <template v-slot:expanded-item="{ headers, item }">
-        <td :colspan="headers.length">More info about {{ item.first_name }}</td>
+        <td :colspan="headers.length">
+          <v-row class="text-start">
+            <v-col cols="3" class="ml-16">
+              <h3>{{item.first_name}} {{item.last_name}}</h3>
+              <h3>{{item.description}}</h3>
+              <h3>Ver.Kim.No: {{item.tax_vkn_number}}</h3>
+            </v-col>
+            <v-col>
+              <h3>{{item.address}}</h3>
+            </v-col>
+          </v-row>
+        </td>
       </template>
     </v-data-table>
 </div>

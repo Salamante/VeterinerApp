@@ -25,13 +25,17 @@ export default {
       }
     })
   },
-  patchCustomer (id) {
+  patchCustomer (id, customer) {
     const token = localStorage.getItem('accessToken')
-    return Api().patch(`/api/customers/${id}/`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    return Api().patch(`/api/customers/${id}/`,
+      {
+        phone: customer.phone
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
   },
   deleteCustomer (id) {
     const token = localStorage.getItem('accessToken')

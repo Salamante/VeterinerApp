@@ -17,6 +17,7 @@ export default {
     }
   },
   async mounted () {
+    console.log(this.$route.params.id)
   },
   methods: {
     popSnackbar (payload) {
